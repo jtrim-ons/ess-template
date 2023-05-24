@@ -7,9 +7,8 @@
     const chevronIcon = `<svg viewBox="0 0 20 20"><path d="M1,6L19,6L10,15Z"/></svg>`;
     const dispatch = createEventDispatcher();
 
-    const items = getContext("places");
-
     export let id = "";
+    export let items;
     export let container = undefined;
     export let mode = "default";
     export let placeholder = "Type an area name or postcode";
@@ -59,7 +58,7 @@
             );
             let json = await res.json();
             if (json.result) {
-                let places = [];
+                let areas = [];
                 geoTypes
                     .filter((g) => g.pcio)
                     .forEach((g) => {
@@ -68,23 +67,23 @@
                             let code = json.result.codes[g.pcio]
                                 ? json.result.codes[g.pcio]
                                 : geoReverseLookup[name];
-                            places.push({
+                            areas.push({
                                 areacd: code,
                                 areanm: name,
                                 typenm: g.label.split("/")[0],
                             });
                         }
                     });
-                let place = items.find(
+                let area = items.find(
                     (p) => p.areacd == json.result.codes.admin_district
                 );
-                if (place) {
+                if (area) {
                     placeholder = "Type a place name or postcode";
                     dispatch("select", {
                         type: "postcode",
-                        areacd: place.areacd,
+                        areacd: area.areacd,
                         postcd: json.result.postcode,
-                        places,
+                        areas,
                     });
                 } else {
                     placeholder = "Postcode must be in England or Wales";
@@ -93,7 +92,7 @@
         } else {
             let areacd = e.detail[idKey];
             let areanm = e.detail[labelKey];
-            dispatch("select", { type: "place", areacd, areanm });
+            dispatch("select", { type: "area", areacd, areanm });
             placeholder = "Type a place name or postcode";
         }
     }

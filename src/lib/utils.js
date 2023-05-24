@@ -18,12 +18,12 @@ export async function getData(url, fetch = window.fetch) {
 const getTypeLabel = (type) =>
         geoNames[type] ? geoNames[type].label : geoCodesLookup[type].label;
 
-export async function getPlaces(url, fetch = window.fetch) {
-    let places = await getData(url, fetch);
-    places.sort((a, b) => a.areanm.localeCompare(b.areanm));
+export async function getAreas(url, fetch = window.fetch) {
+    let areas = await getData(url, fetch);
+    areas.sort((a, b) => a.areanm.localeCompare(b.areanm));
     let lookup = {};
-    places.forEach((d) => (lookup[d.areacd] = d));
-    places.forEach((d) => {
+    areas.forEach((d) => (lookup[d.areacd] = d));
+    areas.forEach((d) => {
         let type = d.areacd.slice(0, 3);
         // d.parentnm = lookup[d.parentcd] ? lookup[d.parentcd].areanm : null;
         d.group =
@@ -35,10 +35,10 @@ export async function getPlaces(url, fetch = window.fetch) {
                     }`
                 : capitalise(getTypeLabel(type));
     });
-    return places;
+    return areas;
 }
 
-export async function getPlace(code, fetch = window.fetch) {
+export async function getArea(code, fetch = window.fetch) {
   try {
 		let typeCode = code.slice(0, 3);
 		let res = await fetch(`${cdnUrl}/${typeCode}/${code}.json`);
@@ -78,12 +78,12 @@ export async function getPlace(code, fetch = window.fetch) {
       ];
     }
     return {
-      place: json.properties,
+      area: json.properties,
       type: geoCodesLookup[typeCode]
     };
 	}
   catch {
-    return {place: null, type: null};
+    return {area: null, type: null};
   }
 }
 
@@ -117,21 +117,21 @@ export function getParent(geocodes, parents) {
   return null;
 }
 
-export function filterLinks(links, place) {
+export function filterLinks(links, area) {
   let thislinks = [];
   let parentlinks = [];
   links.forEach(l => {
-    let parent = getParent(l.geocodes, place.parents);
-    if (l.geocodes.includes(place.typecd)) {
-      thislinks.push({...l, place});
+    let parent = getParent(l.geocodes, area.parents);
+    if (l.geocodes.includes(area.typecd)) {
+      thislinks.push({...l, area});
     } else if (parent) {
-      parentlinks.push({...l, place: getParent(l.geocodes, place.parents)});
+      parentlinks.push({...l, area: getParent(l.geocodes, area.parents)});
     }
   });
   return [...thislinks, ...parentlinks];
 }
 
-export function parseTemplate(template, place) {
+export function parseTemplate(template, area) {
   let output = template;
   let strs = template.match(new RegExp(/\{(.*?)\}/g));
 
@@ -139,9 +139,9 @@ export function parseTemplate(template, place) {
     strs.forEach(s => {
       if (s.includes("name")) {
         let context = s.slice(1,-1).split(",")[1];
-        output = output.replace(s, getName(place, context));
+        output = output.replace(s, getName(area, context));
       } else {
-        output = output.replace(s, place[s.slice(1,-1)]);
+        output = output.replace(s, area[s.slice(1,-1)]);
       }
     });
   }
@@ -177,8 +177,8 @@ export function makePath(code) {
   }
 }
 
-export function filterChildren(place, type) {
-  return place.children.filter(c => type.codes.includes(c.areacd.slice(0, 3)));
+export function filterChildren(area, type) {
+  return area.children.filter(c => type.codes.includes(c.areacd.slice(0, 3)));
 }
 
 export function makeGeoJSON(topojson, layer) {

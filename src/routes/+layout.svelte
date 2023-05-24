@@ -11,7 +11,7 @@
     import ONSHeaderLite from "$lib/layout/ONSHeaderLite.svelte";
 
     export let data;
-    setContext("places", data.places);
+    setContext("areas", data.areas);
 
     // For localisation of menu etc
     let path = $page.url.pathname;

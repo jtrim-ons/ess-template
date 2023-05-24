@@ -10,15 +10,15 @@
     import AreaNav from "../AreaNav.svelte";
     import Placeholder from "$lib/layout/Placeholder.svelte";
 
-    const places = getContext("places");
+    const areas = getContext("areas");
 
-    $: place = places.find(p => p.areacd === $page.params.code);
+    $: area = areas.find(p => p.areacd === $page.params.code);
 </script>
 
-{#if place}
-<Titleblock breadcrumb={[{label: "Home", url: "/"}, {label: "Explore subnational statistics", url: `${base}/`}, {label: "Find a local area", url: `${base}/areas`}, {label: place.areanm}]}>
-    <Headline>{place.areanm}</Headline>
-    <Subhead>Get localised data, insights and trends for {getName(place, "the")}</Subhead>
+{#if area}
+<Titleblock breadcrumb={[{label: "Home", url: "/"}, {label: "Explore subnational statistics", url: `${base}/`}, {label: "Find a local area", url: `${base}/areas`}, {label: area.areanm}]}>
+    <Headline>{area.areanm}</Headline>
+    <Subhead>Get localised data, insights and trends for {getName(area, "the")}</Subhead>
 </Titleblock>
 <AreaNav/>
 <SectionsWithNav contentsLabel="Explore this area">

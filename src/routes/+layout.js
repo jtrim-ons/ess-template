@@ -6,9 +6,9 @@ export const prerender =
 export const trailingSlash = "always";
 
 import { base } from "$app/paths";
-import { getPlaces } from "$lib/utils";
+import { getAreas } from "$lib/utils";
 
 export async function load({ fetch }) {
-    const places = await getPlaces(`${base}/data/csv/places.csv`, fetch);
-    return { places };
+    const areas = await getAreas(`${base}/data/csv/areas.csv`, fetch);
+    return { areas };
 }

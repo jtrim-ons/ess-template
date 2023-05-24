@@ -1,5 +1,6 @@
 <script>
     import { base } from "$app/paths";
+    import { goto } from "$app/navigation";
     import { getContext } from "svelte";
     import { countries, regions } from "$lib/config";
     import Twisty from "$lib/ui/Twisty.svelte";
@@ -11,25 +12,26 @@
 
     export let open = false;
 
-    const places = getContext("places");
+    const areas = getContext("areas");
     const parents = [...regions, ...countries.slice(1)];
 
     function doSelect(e) {
+        console.log(e);
         goto(`${base}/areas/${e.detail.areacd}`);
     }
 </script>
 
 <Content>
     <div class="select-container">
-        <SelectArea mode="search" placeholder="Find an area name or postcode" on:select={doSelect} autoClear/>
+        <SelectArea items={areas} mode="search" placeholder="Find an area name or postcode" on:select={doSelect} autoClear/>
     </div>
     <Twisty label="Browse areas" {open}>
         <Cards colwidth="narrow">
             {#each parents as parent}
             <Card blank>
                 <a href="{base}/areas/{parent.code}" class="parent-link">{parent.name}</a>
-                {#each places.filter(p => p.parentcd === parent.code) as place}
-                <a href="{base}/areas/{place.areacd}">{place.areanm}</a><br/>
+                {#each areas.filter(p => p.parentcd === parent.code) as area}
+                <a href="{base}/areas/{area.areacd}">{area.areanm}</a><br/>
                 {/each}
             </Card>
             {/each}
