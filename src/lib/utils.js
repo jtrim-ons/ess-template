@@ -1,5 +1,6 @@
 import { csvParse, autoType } from "d3-dsv";
 import { feature } from "topojson-client";
+import { getName, capitalise } from "@onsvisual/robo-utils";
 import { cdnUrl, geoCodesLookup, geoNames } from "$lib/config";
 
 export async function getData(url, fetch = window.fetch) {
@@ -87,25 +88,6 @@ export async function getArea(code, fetch = window.fetch) {
   }
 }
 
-export function getName(props, context = null) {
-  let name = props.hclnm ? props.hclnm : props.areanm ? props.areanm : props.areacd;
-  let island = name.startsWith("Isle");
-  let the = [
-    "E12000001", "E12000002", "E12000004", "E12000005", "E12000006", "E12000008", "E12000009",
-    "E09000001", "E07000035"
-  ].includes(props.areacd) || 
-    name.startsWith("Vale of");
-  name = name.replace("&", "and").replace(", City of", "").replace(", County of", "");
-  if (["in","the"].includes(context)) {
-    if (island || the) name = "the " + name;
-  }
-  if (context === "in") {
-    if (island) name = "on " + name;
-    else name = "in " + name;
-  }
-  return name;
-}
-
 export function getParent(geocodes, parents) {
   for (const parent of parents) {
     let typecd = parent.areacd.slice(0, 3);
@@ -149,21 +131,6 @@ export function parseTemplate(template, area) {
   return output;
 }
 
-export function addArticle(str) {
-  if (str === "output area") {
-    str = "Output Area";
-  } else if (str === "lower layer super output area") {
-    str = "Lower layer Super Output Area (LSOA)";
-  } else if (str === "middle layer super output area") {
-    str = "Middle layer Super Output Area (MSOA)";
-  }
-  if (!str.startsWith('unit') && ['a', 'e', 'i', 'o', 'u'].includes(str[0].toLowerCase())) {
-    return "an " + str;
-  } else {
-    return "a " + str;
-  }
-}
-
 export function makePath(code) {
   if ([
     "K04", "E92", "W92",
@@ -194,39 +161,6 @@ export function getColor(value, breaks, colors) {
   }
 }
 
-export function plusminus(val, strings = ["+", "-", ""]) {
-  if (val > 0) {
-    return strings[0];
-  } else if (val < 0) {
-    return strings[1];
-  } else {
-    return strings[2];
-  }
-}
-
-export function suffixer(int) {
-  let mod = Math.round(int) % 10;
-  let suffix = int > 10 && int < 20 ? 'th' : mod == 1 ? 'st' : mod == 2 ? 'nd' : mod == 3 ? 'rd' : 'th';
-  return int + suffix;
-}
-
-export function changeClass(val) {
-  return val > 0 ? 'increase' : val < 0 ? 'decrease' : 'nochange';
-}
-
-export function changeStr(val, suffix = '', decimals = 0) {
-  return val != 0 ? Math.abs(val).toFixed(decimals) + suffix : suffix == 'pp' ? 'n/c' : 'no change';
-}
-
-export function capitalise(str) {
-  return str[0].toUpperCase() + str.slice(1);
-}
-
 export function makeSum(values) {
   return values ? values.reduce((a, b) => a + b) : 0;
-}
-
-export function isNA(arr) {
-  let sum = arr ? arr.slice(0,-1).reduce((a, b) => a + b) : 0;
-  return sum == 0;
 }

@@ -44,9 +44,7 @@
         } else if (filterText.length > 2) {
             return items.filter(
                 (p) =>
-                    p.areanm
-                      .split(" ")
-                      .some((t) => t.toLowerCase().startsWith(filterText.toLowerCase()))
+                    p.areanm.match(new RegExp(`\\b${filterText}`, 'i'))
             );
         }
         return [];
@@ -128,12 +126,7 @@
             ? (label, filterText, option) => false
             : (label, filterText, option) =>
                   `${label}`
-                      .split("<")[0]
-                      .split(" ")
-                      .some((t) => {
-                        console.log(t);
-                        return t.toLowerCase().startsWith(filterText.toLowerCase());
-                      });
+                      .split("<")[0].match(new RegExp(`\\b${filterText}`, 'i'));
 
     let el;
     let isFocused;

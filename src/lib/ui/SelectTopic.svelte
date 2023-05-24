@@ -59,11 +59,7 @@
             ? (label, filterText, option) => false
             : (label, filterText, option) =>
                   `${label}`
-                      .split("<")[0]
-                      .split(" ")
-                      .some((t) =>
-                          t.toLowerCase().startsWith(filterText.toLowerCase())
-                      );
+                      .split("<")[0].match(new RegExp(`\\b${filterText}`, 'i'));
     $: getColor = (val) => colors[val % colors.length];
 
     let el;

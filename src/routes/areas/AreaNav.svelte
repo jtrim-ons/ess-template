@@ -16,7 +16,6 @@
     const parents = [...regions, ...countries.slice(1)];
 
     function doSelect(e) {
-        console.log(e);
         goto(`${base}/areas/${e.detail.areacd}`);
     }
 </script>

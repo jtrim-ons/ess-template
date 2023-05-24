@@ -2,7 +2,7 @@
     import { base } from "$app/paths";
     import { page } from "$app/stores";
     import { getContext } from "svelte";
-    import { getName } from "$lib/utils";
+    import { getName } from "@onsvisual/robo-utils";
     import Titleblock from "$lib/layout/Titleblock.svelte";
     import Headline from "$lib/layout/partial/Headline.svelte";
     import Subhead from "$lib/layout/partial/Subhead.svelte";
