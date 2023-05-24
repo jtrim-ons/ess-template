@@ -1,0 +1,18 @@
+@import url("https://cdn.ons.gov.uk/sixteens/2366f2e/css/main.css");
+
+li {
+    font-size: unset;
+    margin: unset;
+    padding: unset;
+}
+
+@media only screen {
+    [aria-hidden*="true"] {
+        display: unset;
+        visibility: unset;
+    }
+    svg[aria-hidden*="true"] {
+        display: unset;
+        visibility: unset;
+    }
+}

@@ -1,0 +1,160 @@
+@import url("https://cdn.ons.gov.uk/dp-design-system/c44b4f8/css/main.css");
+
+.ons-collapsible__title {
+    padding: 0;
+}
+
+.tile {
+    color: black;
+    font-size: 1rem;
+}
+p {
+    font-size: 1rem;
+}
+.mapboxgl-ctrl-icon,
+.maplibregl-ctrl-icon {
+    visibility: visible !important;
+}
+.tile {
+    color: black;
+    font-size: 1rem;
+}
+a {
+    color: #206095;
+    text-decoration: underline;
+}
+a:hover {
+    color: rgb(0, 60, 87);
+}
+.subtitle {
+    margin: 8px 0;
+}
+.parent {
+    display: block;
+}
+.muted {
+    color: grey;
+}
+select {
+    appearance: none;
+    background: rgb(144, 32, 130)
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8"><path d="M1.5.3L6 5.4 10.5.3c.2-.2.4-.2.6 0l.7.7c.1.2.1.4 0 .5L6.3 7.7c-.2.2-.4.2-.6 0L.2 1.6C.1 1.4.1 1.2.2 1L.9.3c.2-.1.4-.1.6 0z" fill="white"/></svg>')
+        padding-box no-repeat;
+    background-position: calc(100% - 10px) 50%;
+    max-width: 100%;
+    background-size: 16px;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    padding: 4px 33px 4px 6px;
+    margin: 0;
+    font-size: 1rem;
+}
+select:focus {
+    outline: 4px solid orange;
+}
+.type-label {
+    display: inline-block;
+    background-color: rgb(144, 32, 130);
+    color: white;
+    font-weight: bold;
+    padding: 1px 10px;
+    margin: 0;
+    border-radius: 3px;
+    font-size: 1rem;
+}
+.lbl-search {
+    display: block;
+    font-size: 1rem;
+    margin: 12px 0 5px;
+}
+.heading-bold {
+    display: block;
+    margin: 20px 0 10px;
+    padding: 0;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+.heading-overline {
+    border-top: 1px solid black;
+    margin: 50px 0 10px;
+    padding: 20px 0 0;
+}
+.inline-icon {
+    font-size: 14px;
+    margin-left: 5px;
+}
+.tbl-results {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: auto;
+    max-width: 450px;
+    background-color: #f5f5f6;
+    /* border-radius: 10px; */
+    margin-top: 10px;
+    box-shadow: 0 2px 0 0 rgb(65 64 66 / 30%);
+}
+.tbl-results tr + tr {
+    border-top: 1px solid #ddd;
+}
+.tbl-results td {
+    padding: 5px 10px;
+}
+.tbl-results td:not(:last-child) {
+    white-space: nowrap;
+}
+.tbl-results td:last-child {
+    width: 100%;
+    padding-left: 0;
+}
+.btn-link {
+    color: #206095;
+    background: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    text-decoration: underline;
+}
+.btn-link:hover {
+    color: #003c57;
+}
+hr.ons-divider {
+    border: none;
+    border-top: 1px solid rgb(128, 128, 128);
+    margin: 20px 0 0;
+}
+ul.list-columns {
+    list-style: none;
+    margin: 4px 0 8px;
+    padding: 0;
+    column-width: 170px;
+    overflow-x: none;
+}
+ul.list-columns > li {
+    font-size: 16px !important;
+    margin: 0;
+    padding: 0;
+}
+.btn-link {
+    width: auto !important;
+    height: auto !important;
+    background: 0 0 !important;
+    border: none !important;
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+    color: #206095 !important;
+    font-weight: 400;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.select-container {
+    margin: 12px 0;
+}
+a.parent-link {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
