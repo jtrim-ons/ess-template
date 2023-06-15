@@ -4,15 +4,27 @@ import { getName, capitalise } from "@onsvisual/robo-utils";
 import { cdnUrl, geoCodesLookup, geoNames } from "$lib/config";
 
 export async function getData(url, fetch = window.fetch) {
+  
   let res = await fetch(url);
   let str = await res.text();
-  let data = csvParse(str, autoType);
-  let cols = data.columns.filter(c => data[0][c] && data[0][c].includes("|"));
-  data.forEach((d, i) => {
-    cols.forEach(col => {
-      d[col] = d[col].split("|");
+  let data;
+
+  if (hasJsonStructure(str)) {
+
+    data = JSON.parse(str);
+
+  } else {
+
+    data = csvParse(str, autoType);
+    let cols = data.columns.filter(c => data[0][c] && data[0][c].includes("|"));
+    data.forEach((d, i) => {
+      cols.forEach(col => {
+        d[col] = d[col].split("|");
+      });
     });
-  });
+    
+  }
+
   return data;
 }
 
@@ -163,4 +175,16 @@ export function getColor(value, breaks, colors) {
 
 export function makeSum(values) {
   return values ? values.reduce((a, b) => a + b) : 0;
+}
+
+function hasJsonStructure(str) {
+  if (typeof str !== 'string') return false;
+  try {
+      const result = JSON.parse(str);
+      const type = Object.prototype.toString.call(result);
+      return type === '[object Object]' 
+          || type === '[object Array]';
+  } catch (err) {
+      return false;
+  }
 }

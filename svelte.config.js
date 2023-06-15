@@ -18,7 +18,7 @@ const config = {
 			handleHttpError: 'warn'
 		},
 		paths: {
-			base: production && ons_build ? '/visualisations/ess' : production ? '/Ahmad/ess-template' : ''
+			base: production && ons_build ? '/visualisations/ess' : production ? '/ess-template' : ''
 		}
 	}
 };

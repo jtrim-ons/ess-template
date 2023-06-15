@@ -1,0 +1,26 @@
+{
+    "id": "25646EAF",
+    "path": "D:/ess prototyping/ess-template-main -v2/static/data/data_processing_script.R",
+    "project_path": "data_processing_script.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": true,
+    "created": 1685552022481.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "105,6",
+        "scrollLine": "91"
+    },
+    "folds": "9|71|34|0|\n",
+    "lastKnownWriteTime": 1686800709,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1686801989454,
+    "read_only": false,
+    "read_only_alternatives": []
+}
