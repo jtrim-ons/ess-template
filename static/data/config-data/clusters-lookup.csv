@@ -1,0 +1,36 @@
+model,id,description,alternativeDescription
+headline,1,"Higher health and well-being, moderate educational performance ",
+headline,2,"Higher health and productivity, lower well-being ",
+headline,3,"Higher health and well-being, lower connectivity ",
+headline,4,"Higher connectivity, lower health and well-being ",
+economy,1,Above median on all economic metrics,Strong economy
+economy,2,Far above median on all metrics except employment rate,Strong economy but with low employment
+economy,3,"Above median employment rate, below median productivity",High employment but with low productivity
+economy,4,Below median on all economic metrics,Weak economy
+connectivity,1,Far above median on all connectivity metrics,High connectivity
+connectivity,2,Slightly below median on all connectivity metrics,Average connectivity
+connectivity,3,Below median on all connectivity metrics,Below average connectivity
+connectivity,4,Far below median on all connectivity metrics,Very low connectivity
+education,1,Far higher against most education metrics,High education
+education,2,"Higher against all metrics, except FSM absences",
+education,3,"Higher GCSEs, lower KS2 performance",
+education,4,"Higher KS2, lower GCSE performance",
+education,5,Slightly above median except for FSM absences,
+education,6,Lower on all education metrics,Low education
+education,7,"Lower on all metrics, except FSM and CLA absences",
+education,8,Lower foundation age performance,
+skills,1,Above median on all skills metrics,Highly skilled
+skills,2,"Above median level 3 or above qualifications, below median apprenticeships and further education",
+skills,3,"Above median apprenticeships and further education, below median level 3 or above qualifications",
+skills,4,Slightly below median on all skills metrics,Below average skills
+health,1,Above median on all health metrics,High health
+health,2,Broadly median on all health metrics,Average health
+health,3,"Lower overweight adults, higher cardiovascular mortality","Low obesity, high cardiovascular mortality"
+health,4,Far below median on all health metrics,Low health
+wellbeing,1,Far above median on all well-being metrics,High wellbeing
+wellbeing,2,Slightly above median on all well-being metrics,Slightly above average wellbeing
+wellbeing,3,"Better than median anxiety, worse than median on all other metrics",Low overall wellbeing but above average anxiety
+wellbeing,4,Far below median on all well-being metrics,Low wellbeing
+all,99,Northern Ireland,Northern Ireland
+all,999,Scotland,Scotland
+all,9999,Wales,Wales

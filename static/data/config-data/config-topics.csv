@@ -1,0 +1,38 @@
+id,code,name,subGroup,priority
+1,population_density,demographics,,s
+2,population,demographics,,s
+3,employment_rate,economy,employment and income,s
+4,female_life_expectancy,health,individual health,s
+5,male_healthy_life_expectancy,health,individual health,s
+37,female_healthy_life_expectancy,health,individual health,s
+6,gdhi,economy,employment and income,p
+7,gva_hour,economy,,
+8,median_age,demographics,,p
+9,internet_access,connectivity,digital access,s
+10,no_qualifications_rate,skills,,p
+11,unemployment_rate,economy,employment and income,
+12,weekly_pay,economy,employment and income,s
+13,public_transport_employment_centre,connectivity,access to services,p
+14,car_employment_centre,connectivity,access to services,
+15,cycle_employment_centre,connectivity,access to services,
+16,broadband_speed,connectivity,digital access,
+17,mobile_data_coverage,connectivity,digital access,s
+18,pupils_ks2,education,educational attainment,
+19,pupils_gcse,education,educational attainment,p
+20,ofsted_ratings,education,,s
+21,pupils_absences,education,,s
+22,fsm_pupils_absences,education,,
+23,early_learning_language,education,educational attainment,s
+24,early_learning_literacy,education,educational attainment,
+25,early_learning_maths,education,educational attainment,
+26,apprenticeship_starts,education,,
+27,further_education_participation_rate,education,educational attainment,s
+28,cigarette_smokers,health,individual health,
+29,early_years_overweight_rate,health,individual health,
+30,child_overweight_rate,health,individual health,s
+31,adult_overweight_rate,health,individual health,
+32,cancer_diagnosis,health,health services,p
+33,life_satisfaction,wellbeing,,s
+34,feeling_that_life_is_worthwhile,wellbeing,,s
+35,anxiety,wellbeing,,p
+36,additions_to_the_housing_stock,economy,,s

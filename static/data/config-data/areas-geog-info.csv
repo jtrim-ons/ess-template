@@ -1,0 +1,413 @@
+areacd,areanm,urban,coastalTown,imd,headline,economy,connectivity,education,skills,health,wellbeing
+K02000001,United Kingdom,,,,,,,,,,
+E92000001,England,,,,,,,,,,
+N92000002,Northern Ireland,,,,,,,,,,
+S92000003,Scotland,,,,,,,,,,
+W92000004,Wales,,,,,,,,,,
+E12000001,North East,,,,,,,,,,
+E12000002,North West,,,,,,,,,,
+E12000003,Yorkshire and The Humber,,,,,,,,,,
+E12000004,East Midlands,,,,,,,,,,
+E12000005,West Midlands,,,,,,,,,,
+E12000006,East of England,,,,,,,,,,
+E12000007,London,,,,,,,,,,
+E12000008,South East,,,,,,,,,,
+E12000009,South West,,,,,,,,,,
+E10000003,Cambridgeshire,,,,,,,,,,
+E10000006,Cumbria,,,,,,,,,,
+E10000007,Derbyshire,,,,,,,,,,
+E10000008,Devon,,,,,,,,,,
+E10000011,East Sussex,,,,,,,,,,
+E10000012,Essex,,,,,,,,,,
+E10000013,Gloucestershire,,,,,,,,,,
+E10000014,Hampshire,,,,,,,,,,
+E10000015,Hertfordshire,,,,,,,,,,
+E10000016,Kent,,,,,,,,,,
+E10000017,Lancashire,,,,,,,,,,
+E10000018,Leicestershire,,,,,,,,,,
+E10000019,Lincolnshire,,,,,,,,,,
+E10000020,Norfolk,,,,,,,,,,
+E10000023,North Yorkshire,,,,,,,,,,
+E10000024,Nottinghamshire,,,,,,,,,,
+E10000025,Oxfordshire,,,,,,,,,,
+E10000027,Somerset,,,,,,,,,,
+E10000028,Staffordshire,,,,,,,,,,
+E10000029,Suffolk,,,,,,,,,,
+E10000030,Surrey,,,,,,,,,,
+E10000031,Warwickshire,,,,,,,,,,
+E10000032,West Sussex,,,,,,,,,,
+E10000034,Worcestershire,,,,,,,,,,
+E06000001,Hartlepool,Predominantly Urban,Y,1,4,4,2,4,3,4,2
+E06000002,Middlesbrough,Predominantly Urban,N,1,4,4,2,6,3,4,3
+E06000003,Redcar and Cleveland,Urban with Significant Rural,Y,1,4,4,2,7,3,4,3
+E06000004,Stockton-on-Tees,Predominantly Urban,N,2,4,4,2,4,3,2,4
+E06000005,Darlington,Predominantly Urban,N,2,4,4,1,7,3,4,4
+E06000006,Halton,Predominantly Urban,N,1,4,3,2,6,3,4,4
+E06000007,Warrington,Predominantly Urban,N,3,2,3,1,1,4,2,3
+E06000008,Blackburn with Darwen,Predominantly Urban,N,1,4,4,1,8,3,4,4
+E06000009,Blackpool,Predominantly Urban,Y,1,4,4,1,6,3,4,4
+E06000010,Kingston upon Hull,Predominantly Urban,Y,1,4,4,1,6,3,4,4
+E06000011,East Riding of Yorkshire,Predominantly Rural,Y,4,3,3,3,5,1,1,1
+E06000012,North East Lincolnshire,Predominantly Urban,Y,1,4,4,1,8,3,4,2
+E06000013,North Lincolnshire,Urban with Significant Rural,Y,2,1,3,3,4,3,4,1
+E06000014,York,Predominantly Urban,N,5,1,3,1,2,2,2,2
+E06000015,Derby,Predominantly Urban,N,2,4,4,1,7,3,4,4
+E06000016,Leicester,Predominantly Urban,N,1,4,4,1,8,4,4,2
+E06000017,Rutland,Predominantly Rural,N,5,3,3,3,,2,1,1
+E06000018,Nottingham,Predominantly Urban,N,1,4,4,1,6,4,4,4
+E06000019,Herefordshire,Predominantly Rural,N,3,3,3,3,4,4,2,2
+E06000020,Telford and Wrekin,Predominantly Urban,N,2,4,4,2,7,3,4,4
+E06000021,Stoke-on-Trent,Predominantly Urban,N,1,4,3,1,6,3,4,2
+E06000022,Bath and North East Somerset,Urban with Significant Rural,N,5,1,3,2,5,2,,2
+E06000023,Bristol,Predominantly Urban,N,2,4,3,1,4,2,3,4
+E06000024,North Somerset,Urban with Significant Rural,Y,4,1,3,1,5,4,2,2
+E06000025,South Gloucestershire,Predominantly Urban,N,5,2,1,1,5,4,1,3
+E06000026,Plymouth,Predominantly Urban,Y,2,4,3,1,7,1,2,3
+E06000027,Torbay,Predominantly Urban,Y,1,4,4,1,7,3,2,3
+E06000030,Swindon,Predominantly Urban,N,3,4,1,1,7,4,2,2
+E06000031,Peterborough,Predominantly Urban,N,1,4,4,1,6,4,4,4
+E06000032,Luton,Predominantly Urban,N,2,4,4,1,8,4,4,1
+E06000033,Southend-on-Sea,Predominantly Urban,Y,2,1,3,1,4,4,2,2
+E06000034,Thurrock,Predominantly Urban,N,3,1,3,2,5,4,4,2
+E06000035,Medway,Predominantly Urban,N,2,4,3,2,5,3,2,4
+E06000036,Bracknell Forest,Predominantly Urban,N,5,2,1,1,2,4,1,4
+E06000037,West Berkshire,Urban with Significant Rural,N,5,1,1,2,2,4,1,2
+E06000038,Reading,Predominantly Urban,N,3,4,1,1,8,4,2,4
+E06000039,Slough,Predominantly Urban,N,2,2,1,1,1,4,4,4
+E06000040,Windsor and Maidenhead,Predominantly Urban,N,5,2,1,1,2,2,1,4
+E06000041,Wokingham,Predominantly Urban,N,5,2,1,2,2,2,1,4
+E06000042,Milton Keynes,Predominantly Urban,N,3,2,1,1,5,4,2,4
+E06000043,Brighton and Hove,Predominantly Urban,Y,3,2,3,1,4,2,1,4
+E06000044,Portsmouth,Predominantly Urban,N,1,4,4,1,8,4,4,4
+E06000045,Southampton,Predominantly Urban,N,1,4,3,1,7,4,2,4
+E06000046,Isle of Wight,Predominantly Rural,Y,2,4,4,2,7,3,2,4
+E06000047,County Durham,Predominantly Rural,Y,1,4,4,3,8,3,4,3
+E06000049,Cheshire East,Urban with Significant Rural,N,4,1,1,2,3,4,,2
+E06000050,Cheshire West and Chester,Urban with Significant Rural,N,3,1,3,2,3,4,,3
+E06000051,Shropshire,Predominantly Rural,N,3,3,3,3,5,1,1,2
+E06000052,Cornwall,Predominantly Rural,Y,2,3,4,3,3,3,2,2
+E06000053,Isles of Scilly,Predominantly Rural,,5,,,,,,,
+E06000054,Wiltshire,Predominantly Rural,N,4,3,3,2,3,1,1,3
+E06000055,Bedford,Urban with Significant Rural,N,3,1,4,2,7,4,2,1
+E06000056,Central Bedfordshire,Predominantly Rural,N,4,1,3,2,5,4,1,1
+E06000057,Northumberland,Predominantly Rural,Y,2,,4,,4,4,2,2
+E06000058,"Bournemouth, Christchurch and Poole",Predominantly Urban,Y,3,,3,,5,4,1,3
+E06000059,Dorset,Predominantly Rural,Y,4,,4,,3,1,1,1
+E06000060,Buckinghamshire,Urban with Significant Rural,,,,1,,,2,,1
+E06000061,North Northamptonshire,Urban with Significant Rural,,,,4,,,3,,3
+E06000062,West Northamptonshire,Urban with Significant Rural,,,,3,,,4,,2
+E07000008,Cambridge,Predominantly Urban,N,4,1,1,1,3,2,1,2
+E07000009,East Cambridgeshire,Predominantly Rural,N,5,1,3,2,3,4,1,1
+E07000010,Fenland,Predominantly Rural,N,2,1,3,2,3,4,2,3
+E07000011,Huntingdonshire,Predominantly Rural,N,4,1,3,2,3,4,1,1
+E07000012,South Cambridgeshire,Predominantly Rural,N,5,1,1,2,3,2,1,2
+E07000026,Allerdale,Predominantly Rural,Y,2,3,3,4,1,3,2,3
+E07000027,Barrow-in-Furness,Urban with Significant Rural,Y,1,3,4,3,1,1,2,4
+E07000028,Carlisle,Urban with Significant Rural,N,2,3,3,4,5,3,2,2
+E07000029,Copeland,Predominantly Rural,Y,2,3,3,4,1,1,2,3
+E07000030,Eden,Predominantly Rural,N,3,3,4,4,1,3,2,3
+E07000031,South Lakeland,Predominantly Rural,N,4,3,3,4,1,4,2,1
+E07000032,Amber Valley,Predominantly Urban,N,3,1,4,2,7,3,2,1
+E07000033,Bolsover,Urban with Significant Rural,N,2,1,4,2,7,3,2,2
+E07000034,Chesterfield,Predominantly Urban,N,2,4,4,2,7,4,2,4
+E07000035,Derbyshire Dales,Predominantly Rural,N,5,3,4,3,7,4,2,2
+E07000036,Erewash,Predominantly Urban,N,3,1,3,2,7,4,2,2
+E07000037,High Peak,Predominantly Rural,N,4,3,3,4,7,4,2,1
+E07000038,North East Derbyshire,Predominantly Urban,N,3,1,3,2,7,4,2,2
+E07000039,South Derbyshire,Urban with Significant Rural,N,4,1,1,2,7,4,2,2
+E07000040,East Devon,Predominantly Rural,Y,4,3,4,3,3,1,1,2
+E07000041,Exeter,Predominantly Urban,N,3,1,4,2,3,4,1,4
+E07000042,Mid Devon,Predominantly Rural,N,3,3,4,3,3,4,1,1
+E07000043,North Devon,Predominantly Rural,Y,3,3,3,3,3,4,1,1
+E07000044,South Hams,Predominantly Rural,Y,4,3,3,3,3,4,1,1
+E07000045,Teignbridge,Predominantly Rural,Y,4,3,3,3,3,3,1,1
+E07000046,Torridge,Predominantly Rural,Y,2,3,3,3,4,3,1,1
+E07000047,West Devon,Predominantly Rural,N,3,3,3,4,3,4,1,1
+E07000061,Eastbourne,Predominantly Urban,Y,2,1,4,2,5,4,2,2
+E07000062,Hastings,Predominantly Urban,Y,1,1,3,2,4,3,2,1
+E07000063,Lewes,Urban with Significant Rural,Y,4,1,3,2,5,4,1,2
+E07000064,Rother,Predominantly Rural,Y,3,1,4,2,5,4,2,1
+E07000065,Wealden,Predominantly Rural,Y,4,1,3,2,5,4,1,1
+E07000066,Basildon,Predominantly Urban,N,2,1,3,2,5,4,2,1
+E07000067,Braintree,Predominantly Rural,N,4,1,3,2,5,4,2,1
+E07000068,Brentwood,Urban with Significant Rural,N,5,2,1,2,5,4,1,2
+E07000069,Castle Point,Predominantly Urban,Y,3,1,4,2,5,4,1,1
+E07000070,Chelmsford,Predominantly Urban,N,4,1,3,2,5,4,2,2
+E07000071,Colchester,Urban with Significant Rural,Y,3,1,4,2,5,4,1,4
+E07000072,Epping Forest,Urban with Significant Rural,N,4,1,1,2,5,4,2,2
+E07000073,Harlow,Predominantly Urban,N,2,1,3,1,5,3,2,2
+E07000074,Maldon,Predominantly Rural,N,4,1,3,2,5,4,1,2
+E07000075,Rochford,Predominantly Urban,Y,5,3,3,3,5,4,1,1
+E07000076,Tendring,Predominantly Rural,Y,1,3,4,2,5,4,2,2
+E07000077,Uttlesford,Predominantly Rural,N,5,1,3,2,5,2,1,1
+E07000078,Cheltenham,Predominantly Urban,N,4,1,3,2,5,4,1,3
+E07000079,Cotswold,Predominantly Rural,N,5,3,1,3,5,4,1,1
+E07000080,Forest of Dean,Predominantly Rural,N,3,3,4,3,5,4,2,3
+E07000081,Gloucester,Predominantly Urban,N,2,1,3,2,5,3,2,3
+E07000082,Stroud,Urban with Significant Rural,N,5,3,3,2,5,4,1,3
+E07000083,Tewkesbury,Predominantly Rural,N,5,1,3,2,5,4,2,3
+E07000084,Basingstoke and Deane,Urban with Significant Rural,N,4,2,1,2,2,3,1,2
+E07000085,East Hampshire,Predominantly Rural,N,5,1,3,2,2,4,1,2
+E07000086,Eastleigh,Predominantly Urban,Y,5,1,3,1,2,3,1,1
+E07000087,Fareham,Predominantly Urban,Y,5,1,1,2,2,1,1,1
+E07000088,Gosport,Predominantly Urban,Y,3,1,4,1,2,1,2,2
+E07000089,Hart,Urban with Significant Rural,N,5,2,1,2,2,4,1,2
+E07000090,Havant,Predominantly Urban,Y,2,1,4,2,2,3,2,1
+E07000091,New Forest,Urban with Significant Rural,Y,4,1,3,2,2,3,1,1
+E07000092,Rushmoor,Predominantly Urban,N,4,2,1,1,2,4,1,2
+E07000093,Test Valley,Urban with Significant Rural,N,5,1,3,2,2,3,1,1
+E07000094,Winchester,Predominantly Rural,N,5,1,1,2,2,1,1,1
+E07000095,Broxbourne,Predominantly Urban,N,3,1,3,1,5,4,2,3
+E07000096,Dacorum,Urban with Significant Rural,N,4,1,3,2,5,4,1,3
+E07000098,Hertsmere,Predominantly Urban,N,4,2,1,1,5,2,1,3
+E07000099,North Hertfordshire,Urban with Significant Rural,N,5,1,1,2,5,2,1,1
+E07000102,Three Rivers,Predominantly Urban,N,5,2,1,2,5,2,1,1
+E07000103,Watford,Predominantly Urban,N,4,2,1,1,5,2,2,2
+E07000105,Ashford,Urban with Significant Rural,N,3,1,3,2,4,4,2,2
+E07000106,Canterbury,Predominantly Urban,Y,3,1,4,2,4,4,2,2
+E07000107,Dartford,Predominantly Urban,N,3,1,1,1,4,4,2,1
+E07000108,Dover,Urban with Significant Rural,Y,2,1,4,2,4,4,2,2
+E07000109,Gravesham,Predominantly Urban,N,2,1,3,2,4,4,2,2
+E07000110,Maidstone,Urban with Significant Rural,N,3,1,3,2,4,2,2,2
+E07000111,Sevenoaks,Predominantly Rural,N,4,2,1,2,4,4,2,1
+E07000112,Folkestone and Hythe,Urban with Significant Rural,Y,2,1,3,2,4,4,2,2
+E07000113,Swale,Predominantly Rural,Y,1,1,3,2,4,4,2,3
+E07000114,Thanet,Predominantly Urban,Y,1,1,4,2,4,4,2,4
+E07000115,Tonbridge and Malling,Urban with Significant Rural,N,4,2,1,2,4,4,2,3
+E07000116,Tunbridge Wells,Urban with Significant Rural,N,5,1,1,2,4,4,2,4
+E07000117,Burnley,Predominantly Urban,N,1,4,4,1,8,3,4,3
+E07000118,Chorley,Urban with Significant Rural,N,3,1,3,1,8,4,2,1
+E07000119,Fylde,Predominantly Urban,Y,4,1,4,1,8,3,2,1
+E07000120,Hyndburn,Predominantly Urban,N,1,4,4,1,8,3,4,3
+E07000121,Lancaster,Urban with Significant Rural,Y,2,1,4,2,8,4,2,2
+E07000122,Pendle,Predominantly Urban,N,1,1,4,1,8,3,2,1
+E07000123,Preston,Predominantly Urban,N,1,4,4,1,8,3,2,4
+E07000124,Ribble Valley,Predominantly Rural,N,5,1,3,2,8,4,2,2
+E07000125,Rossendale,Predominantly Urban,N,2,1,4,2,8,3,4,2
+E07000126,South Ribble,Predominantly Urban,N,4,4,3,2,8,3,2,4
+E07000127,West Lancashire,Urban with Significant Rural,Y,3,1,4,2,8,4,2,2
+E07000128,Wyre,Predominantly Rural,Y,3,1,4,2,8,4,2,2
+E07000129,Blaby,Predominantly Urban,N,5,1,3,2,5,4,1,1
+E07000130,Charnwood,Predominantly Urban,N,4,1,3,2,5,4,2,1
+E07000131,Harborough,Predominantly Rural,N,5,1,3,2,5,4,1,2
+E07000132,Hinckley and Bosworth,Predominantly Rural,N,4,1,3,2,5,3,1,1
+E07000133,Melton,Predominantly Rural,N,4,1,3,2,5,4,1,3
+E07000134,North West Leicestershire,Predominantly Rural,N,4,1,3,2,5,4,1,1
+E07000135,Oadby and Wigston,Predominantly Urban,N,4,1,3,2,5,4,2,1
+E07000136,Boston,Urban with Significant Rural,N,2,3,4,3,7,3,4,2
+E07000137,East Lindsey,Predominantly Rural,Y,1,3,4,3,7,3,2,1
+E07000138,Lincoln,Predominantly Urban,N,1,4,3,2,7,3,2,2
+E07000139,North Kesteven,Predominantly Rural,N,5,3,3,3,7,3,2,1
+E07000140,South Holland,Predominantly Rural,N,3,3,3,3,7,3,4,3
+E07000141,South Kesteven,Predominantly Rural,N,4,1,4,3,7,4,2,2
+E07000142,West Lindsey,Predominantly Rural,N,3,3,3,3,7,3,2,1
+E07000143,Breckland,Predominantly Rural,N,3,3,3,3,3,4,2,2
+E07000144,Broadland,Urban with Significant Rural,N,5,3,3,3,3,4,1,2
+E07000145,Great Yarmouth,Urban with Significant Rural,Y,1,1,4,3,3,4,2,1
+E07000146,King's Lynn and West Norfolk,Predominantly Rural,Y,2,3,4,3,3,4,2,2
+E07000147,North Norfolk,Predominantly Rural,Y,2,3,4,3,3,4,2,2
+E07000148,Norwich,Predominantly Urban,N,1,4,3,2,3,4,2,4
+E07000149,South Norfolk,Predominantly Rural,N,4,3,3,3,3,4,2,3
+E07000163,Craven,Predominantly Rural,N,4,3,4,4,3,1,1,4
+E07000164,Hambleton,Predominantly Rural,N,5,3,3,3,3,1,1,1
+E07000165,Harrogate,Urban with Significant Rural,N,5,3,3,3,3,1,1,1
+E07000166,Richmondshire,Predominantly Rural,N,5,3,3,4,3,,2,1
+E07000167,Ryedale,Predominantly Rural,N,4,3,3,4,3,3,1,1
+E07000168,Scarborough,Urban with Significant Rural,Y,2,3,4,4,3,1,2,1
+E07000169,Selby,Predominantly Rural,N,4,3,3,3,3,1,2,1
+E07000170,Ashfield,Predominantly Urban,N,2,4,3,2,8,3,2,3
+E07000171,Bassetlaw,Predominantly Rural,N,2,4,4,2,8,3,2,4
+E07000172,Broxtowe,Predominantly Urban,N,4,4,3,1,8,4,2,2
+E07000173,Gedling,Predominantly Urban,N,4,4,4,2,8,4,2,4
+E07000174,Mansfield,Predominantly Urban,N,1,4,4,1,8,3,2,4
+E07000175,Newark and Sherwood,Predominantly Rural,N,3,4,4,2,8,4,2,4
+E07000176,Rushcliffe,Predominantly Rural,N,5,4,1,2,8,4,1,4
+E07000177,Cherwell,Urban with Significant Rural,N,4,1,3,2,5,4,1,1
+E07000178,Oxford,Predominantly Urban,N,3,1,3,2,5,2,1,1
+E07000179,South Oxfordshire,Predominantly Rural,N,5,1,1,2,5,2,1,2
+E07000180,Vale of White Horse,Predominantly Rural,N,5,1,1,2,5,2,1,2
+E07000181,West Oxfordshire,Predominantly Rural,N,5,1,3,2,5,2,1,1
+E07000187,Mendip,Predominantly Rural,N,3,1,3,2,3,3,2,2
+E07000188,Sedgemoor,Predominantly Rural,Y,2,1,3,2,3,3,2,2
+E07000189,South Somerset,Predominantly Rural,N,3,3,4,3,3,3,1,2
+E07000192,Cannock Chase,Urban with Significant Rural,N,3,4,3,2,5,3,2,3
+E07000193,East Staffordshire,Urban with Significant Rural,N,3,1,3,2,5,3,2,2
+E07000194,Lichfield,Urban with Significant Rural,N,4,1,3,2,5,3,2,1
+E07000195,Newcastle-under-Lyme,Predominantly Urban,N,3,1,3,2,5,4,2,1
+E07000196,South Staffordshire,Urban with Significant Rural,N,4,3,3,2,5,4,2,1
+E07000197,Stafford,Urban with Significant Rural,N,4,4,3,2,5,4,2,3
+E07000198,Staffordshire Moorlands,Predominantly Rural,N,4,3,3,3,5,4,2,1
+E07000199,Tamworth,Predominantly Urban,N,2,4,3,2,5,3,2,3
+E07000200,Babergh,Predominantly Rural,N,4,3,4,3,3,4,1,1
+E07000202,Ipswich,Predominantly Urban,N,2,1,3,1,3,4,2,2
+E07000203,Mid Suffolk,Predominantly Rural,N,4,3,3,3,3,4,1,1
+E07000207,Elmbridge,Predominantly Urban,N,5,2,2,1,2,2,1,2
+E07000208,Epsom and Ewell,Predominantly Urban,N,5,2,3,1,2,2,1,4
+E07000209,Guildford,Predominantly Urban,N,5,2,1,2,2,2,1,3
+E07000210,Mole Valley,Urban with Significant Rural,N,5,2,1,2,2,2,1,1
+E07000211,Reigate and Banstead,Predominantly Urban,N,5,2,1,1,2,2,1,2
+E07000212,Runnymede,Predominantly Urban,N,5,2,1,1,2,2,1,3
+E07000213,Spelthorne,Predominantly Urban,N,4,2,1,1,2,4,1,4
+E07000214,Surrey Heath,Predominantly Urban,N,5,2,1,2,2,2,1,1
+E07000215,Tandridge,Urban with Significant Rural,N,5,1,3,2,2,2,1,1
+E07000216,Waverley,Predominantly Rural,N,5,1,1,2,2,2,1,2
+E07000217,Woking,Predominantly Urban,N,5,2,1,1,2,2,1,2
+E07000218,North Warwickshire,Predominantly Rural,N,3,1,3,3,4,4,2,2
+E07000219,Nuneaton and Bedworth,Predominantly Urban,N,2,1,3,2,4,3,2,2
+E07000220,Rugby,Predominantly Urban,N,4,1,3,2,3,4,2,2
+E07000221,Stratford-on-Avon,Predominantly Rural,N,5,1,1,2,3,2,2,2
+E07000222,Warwick,Predominantly Urban,N,5,1,1,2,3,4,2,3
+E07000223,Adur,Predominantly Urban,Y,3,4,4,1,3,4,1,2
+E07000224,Arun,Predominantly Urban,Y,3,1,3,2,3,4,1,1
+E07000225,Chichester,Predominantly Rural,Y,4,1,4,2,3,4,1,2
+E07000226,Crawley,Predominantly Urban,N,3,1,3,1,5,4,2,4
+E07000227,Horsham,Predominantly Rural,N,5,1,3,2,3,4,1,2
+E07000228,Mid Sussex,Predominantly Urban,N,5,1,3,2,3,2,1,4
+E07000229,Worthing,Predominantly Urban,Y,3,1,1,1,3,4,1,2
+E07000234,Bromsgrove,Predominantly Urban,N,5,1,3,2,7,4,,1
+E07000235,Malvern Hills,Predominantly Rural,N,4,3,3,3,7,4,1,4
+E07000236,Redditch,Predominantly Urban,N,2,4,4,2,7,4,,4
+E07000237,Worcester,Predominantly Urban,N,3,1,3,2,7,4,,3
+E07000238,Wychavon,Predominantly Rural,N,4,3,3,2,7,4,,2
+E07000239,Wyre Forest,Urban with Significant Rural,N,2,1,4,2,7,4,,2
+E07000240,St Albans,Predominantly Urban,N,5,1,1,2,5,2,1,2
+E07000241,Welwyn Hatfield,Predominantly Urban,N,4,1,3,2,5,2,1,2
+E07000242,East Hertfordshire,Urban with Significant Rural,N,5,1,3,2,5,2,1,2
+E07000243,Stevenage,Predominantly Urban,N,3,1,4,2,5,4,1,4
+E07000244,East Suffolk,Predominantly Rural,Y,3,3,3,2,3,4,1,1
+E07000245,West Suffolk,Predominantly Rural,N,3,1,3,2,3,4,1,1
+E07000246,Somerset West and Taunton,Predominantly Rural,Y,3,3,3,4,3,3,1,1
+E08000001,Bolton,Predominantly Urban,N,1,4,4,1,8,3,,2
+E08000002,Bury,Predominantly Urban,N,2,4,3,1,3,4,,4
+E08000003,Manchester,Predominantly Urban,N,1,4,4,1,6,4,4,4
+E08000004,Oldham,Predominantly Urban,N,1,4,4,1,6,3,4,2
+E08000005,Rochdale,Predominantly Urban,N,1,4,4,1,6,3,4,3
+E08000006,Salford,Predominantly Urban,N,1,4,4,1,6,3,4,4
+E08000007,Stockport,Predominantly Urban,N,3,1,3,1,7,4,2,2
+E08000008,Tameside,Predominantly Urban,N,1,4,4,1,8,3,4,2
+E08000009,Trafford,Predominantly Urban,N,4,2,3,1,2,4,1,4
+E08000010,Wigan,Predominantly Urban,N,2,4,3,1,8,3,4,1
+E08000011,Knowsley,Predominantly Urban,N,1,4,3,2,6,3,4,4
+E08000012,Liverpool,Predominantly Urban,Y,1,4,4,1,6,3,4,4
+E08000013,St. Helens,Predominantly Urban,N,1,4,3,1,4,3,4,2
+E08000014,Sefton,Predominantly Urban,Y,1,1,4,1,3,3,2,2
+E08000015,Wirral,Predominantly Urban,Y,1,4,4,1,7,3,2,4
+E08000016,Barnsley,Predominantly Urban,N,1,4,4,2,7,3,4,4
+E08000017,Doncaster,Predominantly Urban,N,1,4,4,2,7,3,4,3
+E08000018,Rotherham,Predominantly Urban,N,1,4,4,2,7,3,4,2
+E08000019,Sheffield,Predominantly Urban,N,1,1,4,2,4,4,2,2
+E08000021,Newcastle upon Tyne,Predominantly Urban,N,1,1,4,1,4,2,4,2
+E08000022,North Tyneside,Predominantly Urban,Y,2,4,4,1,1,3,4,4
+E08000023,South Tyneside,Predominantly Urban,Y,1,4,4,1,1,3,4,3
+E08000024,Sunderland,Predominantly Urban,Y,1,4,4,2,4,3,4,4
+E08000025,Birmingham,Predominantly Urban,N,1,4,4,1,6,4,4,4
+E08000026,Coventry,Predominantly Urban,N,2,4,4,1,7,4,4,3
+E08000027,Dudley,Predominantly Urban,N,2,4,3,1,6,3,4,2
+E08000028,Sandwell,Predominantly Urban,N,1,4,4,1,6,3,4,3
+E08000029,Solihull,Predominantly Urban,N,3,2,1,1,4,4,1,3
+E08000030,Walsall,Predominantly Urban,N,1,4,4,1,6,3,4,4
+E08000031,Wolverhampton,Predominantly Urban,N,1,4,4,1,8,3,4,3
+E08000032,Bradford,Predominantly Urban,N,1,4,4,1,6,3,4,2
+E08000033,Calderdale,Predominantly Urban,N,2,4,4,2,7,3,2,3
+E08000034,Kirklees,Predominantly Urban,N,2,4,4,1,7,4,2,1
+E08000035,Leeds,Predominantly Urban,N,1,4,4,1,8,4,2,2
+E08000036,Wakefield,Predominantly Urban,N,1,4,4,2,7,3,4,2
+E08000037,Gateshead,Predominantly Urban,N,1,,4,,5,3,4,2
+E09000001,City of London,Predominantly Urban,N,4,,,1,,,,
+E09000002,Barking and Dagenham,Predominantly Urban,N,1,4,4,1,8,3,4,1
+E09000003,Barnet,Predominantly Urban,N,3,2,1,1,1,2,1,3
+E09000004,Bexley,Predominantly Urban,N,3,2,1,1,2,4,2,3
+E09000005,Brent,Predominantly Urban,N,2,2,1,1,1,2,3,4
+E09000006,Bromley,Predominantly Urban,N,4,2,1,1,2,2,1,4
+E09000007,Camden,Predominantly Urban,N,3,2,2,1,1,2,3,4
+E09000008,Croydon,Predominantly Urban,N,2,2,1,1,5,4,2,4
+E09000009,Ealing,Predominantly Urban,N,2,2,1,1,1,2,3,2
+E09000010,Enfield,Predominantly Urban,N,2,2,4,1,8,2,,4
+E09000011,Greenwich,Predominantly Urban,N,2,2,1,1,1,2,2,4
+E09000012,Hackney,Predominantly Urban,N,1,4,1,1,1,2,3,4
+E09000013,Hammersmith and Fulham,Predominantly Urban,N,2,2,2,1,1,2,3,4
+E09000014,Haringey,Predominantly Urban,N,1,4,3,1,4,2,3,4
+E09000015,Harrow,Predominantly Urban,N,4,2,1,1,1,2,3,2
+E09000016,Havering,Predominantly Urban,N,3,2,1,1,1,4,2,2
+E09000017,Hillingdon,Predominantly Urban,N,3,2,1,1,5,2,3,2
+E09000018,Hounslow,Predominantly Urban,N,2,2,1,1,1,2,2,4
+E09000019,Islington,Predominantly Urban,N,1,2,1,1,1,2,3,4
+E09000020,Kensington and Chelsea,Predominantly Urban,N,2,2,2,1,1,2,3,4
+E09000021,Kingston upon Thames,Predominantly Urban,N,5,2,1,1,2,2,1,4
+E09000022,Lambeth,Predominantly Urban,N,2,2,1,1,4,2,3,4
+E09000023,Lewisham,Predominantly Urban,N,1,1,3,1,1,2,3,3
+E09000024,Merton,Predominantly Urban,N,4,2,1,1,1,2,3,2
+E09000025,Newham,Predominantly Urban,N,1,2,3,1,1,2,,1
+E09000026,Redbridge,Predominantly Urban,N,3,2,4,1,1,2,3,3
+E09000027,Richmond upon Thames,Predominantly Urban,N,5,2,2,1,2,2,1,4
+E09000028,Southwark,Predominantly Urban,N,2,2,1,1,1,2,3,4
+E09000029,Sutton,Predominantly Urban,N,4,2,1,1,1,2,1,3
+E09000030,Tower Hamlets,Predominantly Urban,N,1,2,1,1,1,2,3,3
+E09000031,Waltham Forest,Predominantly Urban,N,2,2,1,1,4,2,3,3
+E09000032,Wandsworth,Predominantly Urban,N,3,2,2,1,2,2,,4
+E09000033,Westminster,Predominantly Urban,N,3,2,2,1,1,2,3,4
+N09000001,Antrim and Newtownabbey,,,,99,99,99,99,99,99,99
+N09000002,"Armagh City, Banbridge and Craigavon",,,,99,99,99,99,99,99,99
+N09000003,Belfast,,,,99,99,99,99,99,99,99
+N09000004,Causeway Coast and Glens,,,,99,99,99,99,99,99,99
+N09000005,Derry City and Strabane,,,,99,99,99,99,99,99,99
+N09000006,Fermanagh and Omagh,,,,99,99,99,99,99,99,99
+N09000007,Lisburn and Castlereagh,,,,99,99,99,99,99,99,99
+N09000008,Mid and East Antrim,,,,99,99,99,99,99,99,99
+N09000009,Mid Ulster,,,,99,99,99,99,99,99,99
+N09000010,"Newry, Mourne and Down",,,,99,99,99,99,99,99,99
+N09000011,Ards and North Down,,,,99,99,99,99,99,99,99
+S12000005,Clackmannanshire,,,,999,999,999,999,999,999,999
+S12000006,Dumfries and Galloway,,,,999,999,999,999,999,999,999
+S12000008,East Ayrshire,,,,999,999,999,999,999,999,999
+S12000010,East Lothian,,,,999,999,999,999,999,999,999
+S12000011,East Renfrewshire,,,,999,999,999,999,999,999,999
+S12000013,Na h-Eileanan Siar,,,,999,999,999,999,999,999,999
+S12000014,Falkirk,,,,999,999,999,999,999,999,999
+S12000017,Highland,,,,999,999,999,999,999,999,999
+S12000018,Inverclyde,,,,999,999,999,999,999,999,999
+S12000019,Midlothian,,,,999,999,999,999,999,999,999
+S12000020,Moray,,,,999,999,999,999,999,999,999
+S12000021,North Ayrshire,,,,999,999,999,999,999,999,999
+S12000023,Orkney Islands,,,,999,999,999,999,999,999,999
+S12000026,Scottish Borders,,,,999,999,999,999,999,999,999
+S12000027,Shetland Islands,,,,999,999,999,999,999,999,999
+S12000028,South Ayrshire,,,,999,999,999,999,999,999,999
+S12000029,South Lanarkshire,,,,999,999,999,999,999,999,999
+S12000030,Stirling,,,,999,999,999,999,999,999,999
+S12000033,Aberdeen City,,,,999,999,999,999,999,999,999
+S12000034,Aberdeenshire,,,,999,999,999,999,999,999,999
+S12000035,Argyll and Bute,,,,999,999,999,999,999,999,999
+S12000036,City of Edinburgh,,,,999,999,999,999,999,999,999
+S12000038,Renfrewshire,,,,999,999,999,999,999,999,999
+S12000039,West Dunbartonshire,,,,999,999,999,999,999,999,999
+S12000040,West Lothian,,,,999,999,999,999,999,999,999
+S12000041,Angus,,,,999,999,999,999,999,999,999
+S12000042,Dundee City,,,,999,999,999,999,999,999,999
+S12000045,East Dunbartonshire,,,,999,999,999,999,999,999,999
+S12000047,Fife,,,,999,999,999,999,999,999,999
+S12000048,Perth and Kinross,,,,999,999,999,999,999,999,999
+S12000049,Glasgow City,,,,999,999,999,999,999,999,999
+S12000050,North Lanarkshire,,,,999,999,999,999,999,999,999
+W06000001,Isle of Anglesey,,,,9999,9999,9999,9999,9999,9999,9999
+W06000002,Gwynedd,,,,9999,9999,9999,9999,9999,9999,9999
+W06000003,Conwy,,,,9999,9999,9999,9999,9999,9999,9999
+W06000004,Denbighshire,,,,9999,9999,9999,9999,9999,9999,9999
+W06000005,Flintshire,,,,9999,9999,9999,9999,9999,9999,9999
+W06000006,Wrexham,,,,9999,9999,9999,9999,9999,9999,9999
+W06000008,Ceredigion,,,,9999,9999,9999,9999,9999,9999,9999
+W06000009,Pembrokeshire,,,,9999,9999,9999,9999,9999,9999,9999
+W06000010,Carmarthenshire,,,,9999,9999,9999,9999,9999,9999,9999
+W06000011,Swansea,,,,9999,9999,9999,9999,9999,9999,9999
+W06000012,Neath Port Talbot,,,,9999,9999,9999,9999,9999,9999,9999
+W06000013,Bridgend,,,,9999,9999,9999,9999,9999,9999,9999
+W06000014,Vale of Glamorgan,,,,9999,9999,9999,9999,9999,9999,9999
+W06000015,Cardiff,,,,9999,9999,9999,9999,9999,9999,9999
+W06000016,Rhondda Cynon Taf,,,,9999,9999,9999,9999,9999,9999,9999
+W06000018,Caerphilly,,,,9999,9999,9999,9999,9999,9999,9999
+W06000019,Blaenau Gwent,,,,9999,9999,9999,9999,9999,9999,9999
+W06000020,Torfaen,,,,9999,9999,9999,9999,9999,9999,9999
+W06000021,Monmouthshire,,,,9999,9999,9999,9999,9999,9999,9999
+W06000022,Newport,,,,9999,9999,9999,9999,9999,9999,9999
+W06000023,Powys,,,,9999,9999,9999,9999,9999,9999,9999
+W06000024,Merthyr Tydfil,,,,9999,9999,9999,9999,9999,9999,9999

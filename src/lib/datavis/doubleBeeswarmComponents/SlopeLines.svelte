@@ -2,48 +2,33 @@
 
 import { colorsObject } from '$lib/config';
 
-export let x, xDomain, lineDataArray, onHover;
+export let lineDataArray, x1, x2, hoverIndex;
+
+let primaryRolesArray = ["main", "parent", "country", "uk", "custom1", "custom2", "custom3", "custom4"];
 
 </script>
 
-{#each lineDataArray as lineData, i}
 
-    <g class={"slopeGroup slopeGroup"+i}>
+<g class="slopeLinesContainer">
 
-        <g class="slopeLineGroup">
+    {#if lineDataArray[0].length === lineDataArray[1].length}
+
+        {#each lineDataArray[0].map((e) => e.datum.areacd) as area}
+
 
             <line
-            class="slopeLine"
-            x1={lineData.x1+x(xDomain[0])}
-            x2={lineData.x2+x(xDomain[1])}
-            y1={lineData.y1}
-            y2={lineData.y2}
-            stroke={onHover ? "#F39431": colorsObject[lineData.role]}
-            stroke-width="2px"
-            zcode={lineData.zCode}
+            x1={lineDataArray[0].find((e) => e.datum.areacd == area).y+x1}
+            x2={lineDataArray[1].find((e) => e.datum.areacd == area).y+x2}
+            y1={lineDataArray[0].find((e) => e.datum.areacd == area).x}
+            y2={lineDataArray[1].find((e) => e.datum.areacd == area).x}
+            stroke-width="3px"
+            stroke={hoverIndex != null ? "#F39431": colorsObject[lineDataArray[0].find((e) => e.datum.areacd == area).datum.role]}
+            
             ></line>
 
-        </g>
 
-        <g class="slopeLabelGroup">
+        {/each}
 
-            <g
-            transform={"translate("+(x(xDomain[0])+(x(xDomain[1])-x(xDomain[0]))/2)+","+((lineData.y1+lineData.y2)/2+(i % 2 == 0 ? -5 : 14))+")"}>
+    {/if}
 
-                <g transform={"rotate("+60*Math.atan((lineData.y2-lineData.y1)/((x(xDomain[1])-lineData.x2)-(x(xDomain[0])+lineData.x1)))+")"}>
-
-                    <text
-                    y={0}
-                    text-anchor="middle"
-                    stroke="none"
-                    fill={onHover ? "#F39431": colorsObject[lineData.role]}
-                    font-size={"14px"}
-                    zcode={null}
-                    >{lineData.text}</text>
-
-                </g>
-            </g>
-        </g>
-    </g>
-
-{/each}
+</g>

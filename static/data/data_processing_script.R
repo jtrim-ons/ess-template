@@ -1,109 +1,80 @@
 library(tidyverse)
-library(jsonlite)
+library(readxl)
 library(stringr)
-library(data.table)
 
-csvFileNamesList <- list.files("./csv-preprocess", pattern='csv')
+config_indicators <- read_csv("./config-data/config-indicators.csv")
+areas <- read_csv("./config-data/areas.csv")
 
-areasLookup <- read_csv("areasLookup.csv") 
+latest_year_data <- data.frame(areacd=character(),
+                                code=character(),
+                                year=double(),
+                                value=double(), 
+                                stringsAsFactors=FALSE)
 
-writeToJSONFile <- function(dataFrame, filePath, replaceText = FALSE) {
+created_files_log <- data.frame(code=character(),
+                                type=character(),
+                                stringsAsFactors=FALSE)
+
+for (row in 1:nrow(config_indicators)) {
   
-  dataList <- split(dataFrame,seq(nrow(dataFrame)))  
+  if (is.na(config_indicators[row, "label"]$label)) {
+    
+    config_indicators[row, "label"] <- str_to_sentence(str_replace_all(config_indicators[row, "code"], "_", " "))
+  }
   
-  outputJSON <- list()
+  indicator_code <- config_indicators[row, "code"]$code
+
+  indicator_data <- read_csv(paste0("./csv-preprocess/", indicator_code ,".csv"))
   
-  for (row in dataList) {
+  indicator_data <- indicator_data %>%
+    filter(areacd %in% areas$areacd)
+  
+  list_of_years <- as.numeric(unlist(colnames(indicator_data)[-1]))
+  latest_year <- max(list_of_years)
+  config_indicators[row, "latestYear"] <- latest_year
+  
+  default_initial_year <- as.numeric(config_indicators[row, "defaultInitialYear"])
+  
+  flattened_indicator_data <- indicator_data %>%
+    pivot_longer(!areacd , names_to = "year", values_to = "value") %>%
+    filter(is.numeric(as.numeric(value))) %>%
+    filter(value != "na") %>%
+    filter(!is.na(value))
     
-    key <- row[[1]]
+  indicator_latest_year_data <- flattened_indicator_data %>%
+    filter(year == latest_year) %>%
+    mutate(codeId = config_indicators[row, "id"]$id)
+  
+  latest_year_data <- rbind(latest_year_data, indicator_latest_year_data)
+  
+  indicator_initial_year_data <- flattened_indicator_data %>%
+    filter(year == default_initial_year)
+  
+  if (nrow(indicator_initial_year_data) > 0) {
     
-    valuesList <- list()
-    
-    for (i in 2:length(row)) {
-      
-      columnKey <- str_replace(colnames(dataFrame)[i], replaceText, "")
-      valuesList[[columnKey]] <- unbox(as.numeric(row[[i]]))
-      
-    }
-    
-    outputJSON[[key]] <- valuesList
+    created_files_log <- created_files_log %>%
+      add_row(code=indicator_code, type="initial")
+  
+    write.csv(indicator_initial_year_data, paste0("./csv/initial-year/",indicator_code,".csv"), row.names = FALSE)
     
   }
   
-  write(toJSON(outputJSON, pretty = TRUE), filePath)
+  indicator_other_year_data <- flattened_indicator_data %>%
+    filter(!year %in% c(latest_year, default_initial_year))
   
+  if (nrow(indicator_other_year_data) > 0) {
+    
+    created_files_log <- created_files_log %>%
+      add_row(code=indicator_code, type="other")
+
+    write.csv(indicator_other_year_data, paste0("./csv/other-years/",indicator_code,".csv"), row.names = FALSE)
+    
+  }
+
 }
-  
 
-for (file in csvFileNamesList)  {
-  
-  print(file)
-  
-  inputDataFrame <- read_csv(paste0("./csv-preprocess/",file))
-  
-  listOfYears <- as.numeric(unlist(colnames(inputDataFrame)[-1]))
-  
-  dataRange <- list(min(listOfYears), max(listOfYears))
-  
-  #writeToJSONFile(inputDataFrame, paste0("./json/indicator-raw/all-years/", str_replace(file, ".csv", ""), ".json"), "xyz")
-  
-  for (year in listOfYears) {
-    
-    dir.create(paste0("./json/indicator-raw/", year), showWarnings = FALSE)
-    
-    singleYearDataFrame <- subset(inputDataFrame, select = c("areacd", year))
-    
-    eval(parse(text=paste0('singleYearJSON <- toJSON(setNames(as.list(singleYearDataFrame$`', year,'`), singleYearDataFrame$areacd),  auto_unbox = TRUE)')))
-    
-    #write(singleYearJSON, paste0("./json/indicator-raw/", year,"/", str_replace(file, ".csv", ""), ".json"))
-  
-  }
-  
-  dir.create(paste0("./json/area/", str_replace(file, ".csv", "")), showWarnings = FALSE)
+write.csv(latest_year_data, "./csv/latest-year/data.csv", row.names = FALSE)
+#write.csv(config_indicators, "./config-data/config-indicators.csv", row.names = FALSE, na="")
+write.csv(created_files_log, "./config-data/datasets-log.csv", row.names = FALSE)
 
-  for (i in seq(nrow(inputDataFrame))) {
-    
-    #write(toJSON(unbox(inputDataFrame[i,])), paste0("./json/area/", str_replace(file, ".csv", ""),"/",inputDataFrame[i, "areacd"],".json"))
-    
-  }
-  
-  rankDataFrame <- merge(x = inputDataFrame, y = areasLookup, by = "areacd", all.x = TRUE)
-  
-  for (geoLevel in colnames(areasLookup)[-1:-2]) {
-    
-    eval(parse(text=paste0("rankDataFrameFiltered <- filter(rankDataFrame, !is.na(",geoLevel,") && ",geoLevel," != 'N')")))
-    
-    for (year in listOfYears) {
-    
-      eval(parse(text=paste0("rankDataFrameFiltered <- rankDataFrameFiltered %>% group_by(",geoLevel,") %>% mutate(rank_",geoLevel,"_",year,"=(",geoLevel,"!='N')*min_rank(`",year,"`))")))
-      eval(parse(text=paste0("rankDataFrameFiltered$`",year,"` <- NULL")))
-      
-    }
-    
-    rankDataFrameFiltered$areanm <- NULL
-    
-    for (geoLevelAgain in colnames(areasLookup)[-1:-2]) {
-      
-      eval(parse(text=paste0("rankDataFrameFiltered$",geoLevelAgain," <- NULL")))
-      
-    }
-    
-    if (nrow(rankDataFrameFiltered) > 0) {
-    
-      #writeToJSONFile(rankDataFrameFiltered, paste0("./json/indicator-rank/", geoLevel, "/", str_replace(file, "-.csv", ""), ".json"), paste0("rank_", geoLevel, "_"))
-    
-    }
-    
-    dir.create(paste0("./json/rank-area/", str_replace(file, ".csv", "")), showWarnings = FALSE)
-    
-    if (nrow(rankDataFrameFiltered) > 0) {
-    
-    for (i in seq(nrow(rankDataFrameFiltered))) {
-      
-      write(toJSON(unbox(rankDataFrameFiltered[i,])), paste0("./json/rank-area/", str_replace(file, ".csv", ""),"/",rankDataFrame[i, "areacd"],".json"))
-      
-    }
-      
-    }
-  }
-}
+#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

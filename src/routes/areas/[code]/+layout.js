@@ -6,95 +6,43 @@ export const prerender =
 export const trailingSlash = "always";
 
 import { base } from "$app/paths";
-import { getData, getAreas } from "$lib/utils";
+import { getData } from "$lib/utils";
 import { get } from 'svelte/store';
-import { indicators, defaultAreaComponents, areaComponents  } from "$lib/config.js";
-import { selectedArea, findSelectedAreas } from "$lib/selectedAreasStore.js";
 
 export async function load({ fetch, params }) {
 
-    let requiredDataLookup = {"double-beeswarm": "data2", "map": "data1", "line": "data2"};
+    const areaSections = await getData(`${base}/data/config-data/config-area-sections.csv`, fetch);
+    const areaKeyIndicators = await getData(`${base}/data/config-data/config-area-key.csv`, fetch);
+    const datasetsLog = await getData(`${base}/data/config-data/datasets-log.csv`, fetch);
 
-    let componentsArray = params.code in areaComponents ? areaComponents.params.code : defaultAreaComponents;
+    let otherDataIndicators = areaSections.map((e) => e.code);
+    //.filter((e) => e.priority == "p")
 
-    componentsArray.forEach((c) => { c["indicator"] = indicators.find((i) => c.code == i.code); })
+    let initialDataIndicators = [...otherDataIndicators,...areaKeyIndicators.map((e) => e.code).filter((e) => !otherDataIndicators.includes(e.code))];
 
-    const areas = await getAreas(`${base}/data/csv/areas.csv`, fetch);
+    console.log(initialDataIndicators);
 
-    selectedArea.set(areas.find(p => p.areacd === params.code));
+    let otherData = {}, initialData = {};
 
-    let preloadedAreas = findSelectedAreas(get(selectedArea), [true, true, true, true, null], areas);
+    for (var i = 0; i < otherDataIndicators.length; i++) {
 
-    console.log(componentsArray)
+        if (datasetsLog.filter((e) => e.code == otherDataIndicators[i] & e.type == "other").length > 0) {
 
-    let dataImportingInstructions = [...new Map(componentsArray.map(({ type, code }) => ({type: requiredDataLookup[type], code: code, concat: requiredDataLookup[type]+"-"+code})).map(v => [v.concat, v])).values() ];
+            let data = await getData(`${base}/data/csv/other-years/${otherDataIndicators[i]}.csv`, fetch)
 
-    let data1 = [], data2 = [];
-
-    console.log(dataImportingInstructions)
-
-    for (var i = 0; i < dataImportingInstructions.length; i++) {
-
-        let indicator = indicators.find((e) => e.code == dataImportingInstructions[i].code);
-
-        console.log(indicator)
-
-        if (dataImportingInstructions[i].type == "data1") {
-
-            let importedData = await getData(`${base}/data/json/indicator-raw/`+indicator.years[1]+`/`+indicator.code+`.json`, fetch)
-
-            data1.push({code: indicator.code, year: indicator.years[1], data: importedData})
-
-        } else if (dataImportingInstructions[i].type == "data2") {
-
-            for (var j=0; j < preloadedAreas.length; j++) {
-
-                let importedData = await getData(`${base}/data/json/area/`+indicator.code+`/`+preloadedAreas[j].areacd+`.json`, fetch)
-
-                importedData.areanm = preloadedAreas[j].areanm;
-                importedData.code = indicator.code;
-                importedData.role = preloadedAreas[j].role;
-
-                data2.push(importedData);
-            }
+            otherData[otherDataIndicators[i]] = data;
         }
-
     }
 
-    let data3 = [], data4 = [];
+    for (var i = 0; i < initialDataIndicators.length; i++) {
 
-    let keyIndicators = ["population_density", "population", "female_life_expectancy", "gdhi"];
-    let mainAreas = preloadedAreas.filter((e) => ["main", "parent", "country"].includes(e.role))
+        if (datasetsLog.filter((e) => e.code == initialDataIndicators[i] & e.type == "initial").length > 0) {
 
-    console.log(mainAreas);
+            let data = await getData(`${base}/data/csv/initial-year/${initialDataIndicators[i]}.csv`, fetch)
 
-    
-
-    for (var i = 0; i < keyIndicators.length; i++) {
-
-        let indicator = indicators.find((e) => e.code == keyIndicators[i]);
-
-        for (var j=0; j < mainAreas.length; j++) {
-
-            let importedData = await getData(`${base}/data/json/area/`+indicator.code+`/`+mainAreas[j].areacd+`.json`, fetch)
-
-            importedData.areanm = preloadedAreas[j].areanm;
-            importedData.indicator = indicator;
-            importedData.role = preloadedAreas[j].role;
-
-            data3.push(importedData);
-
-            let importedData2 = await getData(`${base}/data/json/rank-area/`+indicator.code+`/`+mainAreas[j].areacd+`.json`, fetch)
-
-            importedData2.areanm = preloadedAreas[j].areanm;
-            importedData2.indicator = indicator;
-            importedData2.role = preloadedAreas[j].role;
-
-            data4.push(importedData2);
+            initialData[initialDataIndicators[i]] = data;
         }
-
-       
     }
 
-    return { componentsArray, preloadedAreas, data1, data2, data3, data4, dataImportingInstructions };
+   return {areaCode: params.code, configData: {areaSections: areaSections, areaKeyIndicators: areaKeyIndicators}, preloadedData: {otherData: otherData, initialData: initialData}}
 }

@@ -7,8 +7,8 @@
     import TopicNav from "./TopicNav.svelte";
 </script>
 
-<Titleblock breadcrumb={[{label: "Home", url: "/"}, {label: "Explore subnational statistics", url: `${base}/`}, {label: "Expore indicators"}]}>
-    <Headline>Explore indicators</Headline>
+<Titleblock breadcrumb={[{label: "Home", url: "/"}, {label: "Explore subnational statistics", url: `${base}/`}, {label: "Expore topics"}]}>
+    <Headline>Explore topics</Headline>
     <Subhead>Discover national and regional trends with maps, charts and headline indicators</Subhead>
 </Titleblock>
 <TopicNav open/>

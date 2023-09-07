@@ -4,3 +4,4 @@ build
 /.svelte-kit
 /package
 /source-data
+.Rproj.user

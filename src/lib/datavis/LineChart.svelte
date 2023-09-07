@@ -1,193 +1,74 @@
 <script>
 
 import { scaleLinear } from 'd3-scale';
-import { line } from 'd3-shape';
-import { selectedArea, comparisonAreasArray } from "$lib/selectedAreasStore.js";
-import AxisY from './doubleBeeswarmComponents/AxisY.svelte';
-import AxisX from './doubleBeeswarmComponents/AxisX.svelte';
-import { colorsObject, rolesHierarchyObject, rolesHierarchyObject2 } from '$lib/config';
-import { select } from "d3-selection";
+import AxisY from './shared/AxisY.svelte';
+import AxisX from './shared/AxisX.svelte';
+import Line from './lineChartComponents/Line.svelte';
+import Labels from './Labels.svelte';
+import labelplacer from 'labelplacer';
+import { getContext } from 'svelte';
 
-export let data, indicator, width = 360, zeroBaseline = true, labelsOnChart = true, legend = true, visibleAreas;
 
-$: selected = {area: $selectedArea, data: data.find((e)=> e.areacd === $selectedArea.areacd)}
+let areas = getContext('areas');
 
-let restructuredData = [];
+export let plottedAreas, filteredData, indicator;
 
-$: filteredData = data.filter((e) => visibleAreas.map((f) => f.areacd).includes(e.areacd));
+let width=400, height=500, labelColumnWidth = 200
 
-$: createRestructuredData(filteredData, indicator) 
-
-function createRestructuredData(data, indicator) {
-
-    let outputArray = [];
-
-    data = data.sort((a,b) => rolesHierarchyObject[b.role] - rolesHierarchyObject[a.role]);
-
-    data.forEach((e) => {
-
-    let dataArray = [];
-
-    for (var i = indicator.years[0]; i <= indicator.years[1]; i++) {
-
-        if (i in e) {dataArray.push({x : i, y : e[i]})}
-    }
-
-    outputArray.push({name: e.areanm, z: e.areacd, data: dataArray, role: e.role })
-    })
-
-    restructuredData = outputArray
-}
-
-$: rolesArray = [...new Set(restructuredData.map((e) => e.role))].sort((a,b) => rolesHierarchyObject2[a] - rolesHierarchyObject2[b]);
-
-let chartHeight = 300; // number of pixels or valid css height string
-
-$: outerPadding = {top: (rolesArray.length+1)*20, left: 70, right: 180, bottom: 40};
-let columns = 2;
+$: outerPadding = {top: 10, left: 80, right: labelColumnWidth + 5, bottom: 40};
 
 $: chartWidth = width - outerPadding.left - outerPadding.right;
+$: chartHeight = height - outerPadding.top - outerPadding.bottom
 
-$: xDomain = [Math.min(...restructuredData.map(d => Math.min(...d.data.map(e => e.x)) )), Math.max(...restructuredData.map(d => Math.max(...d.data.map(e => e.x)) ))];
+$: xDomain = [Math.min(...filteredData.map((d) => d.year)), Math.max(...filteredData.map((d) => d.year))];
 
 $: x = scaleLinear()
 	.domain(xDomain)
 	.range([0, chartWidth]);
 
-$: yDomain = [zeroBaseline ? 0 : Math.min(...restructuredData.map(d => Math.min(...d.data.map(e => e.y)) )), Math.max(...restructuredData.map(d => Math.max(...d.data.map(e => e.y)) ))];
+$: yDomain = [indicator.zeroBaseline === "TRUE" ? 0 : Math.floor(0.95*Math.min(...filteredData.map((d) => d.value))), Math.ceil(Math.max(...filteredData.map((d) => d.value)))];
 
 $: y = scaleLinear()
 	.domain(yDomain)
 	.range([chartHeight, 0]);
 
-$: pathFunction = line()
-    .x((d) => { return x(d.x); })
-    .y((d) => { return y(d.y); });
-
-$: console.log(indicator.label.toLowerCase());
-
-$: changeOverSampleSelected = (selected.data[xDomain[1]]-selected.data[xDomain[0]])/selected.data[xDomain[0]];
-
 $: hoverIndex = null;
 
-function mouseoverEvent(event) {
+let primaryRolesArray = ["main", "parent", "country", "uk", "custom1", "custom2", "custom3", "custom4"];
 
-    hoverIndex = parseFloat(select(this).attr("hoverid"));
-}
+$: labelData = plottedAreas.map((e) => ({
+  ...e,
+  yPosition: y(filteredData.find((el) => el.areacd === e.areacd & el.year === Math.max.apply(null,filteredData.filter((elm) => elm.areacd === e.areacd).map((elmt) => elmt.year))).value),
+  areanm: areas.find((el) => e.areacd === el.areacd).areanm
+})).filter((e,i) => {if(hoverIndex != null ) {return i==hoverIndex} else {return primaryRolesArray.includes(e.role) }});
 
-function mouseleaveEvent(event) {
-
-    hoverIndex = null;
-}
-
-$: console.log(hoverIndex);
-
+$: labelPlacements = labelplacer(labelData, [-outerPadding.top, chartHeight], d => d.yPosition, d => d.areanm.length > 20 ? 34: 17);
 
 </script>
 
-<div class="chart-title">
-
-<h3>{selected.area.areanm}'s {indicator.label.toLowerCase()} has {changeOverSampleSelected > 0.02 ? "increased" : changeOverSampleSelected < -0.02 ? "decreased" : "barely changed"} {changeOverSampleSelected > 0.02 || changeOverSampleSelected < -0.02 ? "by " + Math.abs((changeOverSampleSelected*100).toFixed(0))+"%" : ""} since {xDomain[0]}</h3>
-
-<p>{indicator.unit} by area, {xDomain[0]} to {xDomain[1]}</p>
-
-</div> 
-
 <div class="svg-container" bind:clientWidth={width}>
+
 	<svg
-	height={chartHeight+outerPadding.top+outerPadding.bottom}
+	{height}
 	{width}
 	>
-        <g class="key">
 
-        {#each rolesArray as role, j}
-
-        <g transform={"translate(0,"+(j+1)*20+")"}>
-
-            <line
-            x1=0
-            x2=20 
-            y1=-5
-            y2=-5
-            stroke={colorsObject[role]}
-            stroke-width="2px"
-            ></line>
-
-            {#if ["main", "parent", "country", "custom0", "custom1", "custom2", "custom3", "custom4"].includes(role)}
-
-            <g transform={"translate("+10+","+(-5)+")"}>
-
-            {#if role === "parent"}
-
+        <g 
+        class="chart-container"
+        transform={"translate("+outerPadding.left+","+outerPadding.top+")"}
+        >
             <rect
-            x=-3
-            y=-3
-            width=6
-            height=6
-            fill={colorsObject[role]}
-            stroke="white"
-            >
-            </rect>
-
-            {:else if role === "country"}
-
-            <rect
-            transform="rotate(45)"
-            x=-3
-            y=-3
-            width=6
-            height=6
-            fill={colorsObject[role]}
-            stroke="white"
-            >
-            </rect>
-
-            {:else}
-
-            <circle
-            r=3.5
-            fill={colorsObject[role]}
-            stroke="white"
-            >
-            </circle>
-
-            {/if} 
-
-            </g>
-
-        {/if}
-
-            <text
-            x=30
-            font-size="16px"
-            fill={colorsObject[role]}
-
-            >{role === "parent" ? data.find((e) => e.role == "parent").areanm : 
-            role === "main" ? data.find((e) => e.role == "main").areanm :
-            role === "country" ? data.find((e) => e.role == "country").areanm :
-            role === "custom0" ? data.find((e) => e.role == "custom0").areanm :
-            role === "custom1" ? data.find((e) => e.role == "custom1").areanm :
-            role === "custom2" ? data.find((e) => e.role == "custom2").areanm :
-            role === "custom3" ? data.find((e) => e.role == "custom3").areanm :
-            role === "custom4" ? data.find((e) => e.role == "custom4").areanm :
-            role === "neighbour" ? "Other areas in "+data.find((e) => e.role == "parent").areanm:
-            role === "similar" ? "Statistically similar areas to "+data.find((e) => e.role == "main").areanm : ""}</text>
-
-        </g>
-
-
-        {/each}
-
-        </g>
-
-        <g class="chart-container"
-        transform={"translate("+outerPadding.left+","+outerPadding.top+")"}>
+            width={chartWidth}
+            height={chartHeight}
+            fill="black"
+            opacity=0.02
+            stroke="none"
+            ></rect>
 
             <AxisY
             {yDomain}
             {y}
-            tickInterval={indicator.yTicks}
-
+            {indicator}
             ></AxisY>
 
             <AxisX
@@ -196,116 +77,48 @@ $: console.log(hoverIndex);
             {x}
             ></AxisX>
 
-            {#each restructuredData as lineData, i}
+            <g class="visibleLinesGroup">
 
-                <g
-                opacity={hoverIndex === i || hoverIndex === null ? 1 : 0.25}>
+                {#each plottedAreas.reverse() as area, i}
 
-                <path
-                d={pathFunction(lineData.data)}
-                fill="none"
-                stroke={hoverIndex === i ? "#F39431" : colorsObject[lineData.role]}
-                stroke-width="2px"
-                opacity={hoverIndex === i || ["main", "parent", "country", "custom0", "custom1", "custom2", "custom3", "custom4"].includes(lineData.role) ? 1 : 0.5}
-                ></path>
+                    <Line
+                    {area}
+                    lineData={filteredData.filter((e) => e.areacd === area.areacd)}
+                    {i}
+                    {hoverIndex}
+                    {x}
+                    {y}
+                    {xDomain}
+                    ></Line>
 
-                {#if hoverIndex === i || ["main", "parent", "country", "custom0", "custom1", "custom2", "custom3", "custom4"].includes(lineData.role) }
+                {/each}
 
-                <text
-                x={x(xDomain[1])+5}
-                y={5+y(lineData.data.find((e)=>e.x === xDomain[1]).y)}
-                font-size="16px"
-                fill={hoverIndex === i ? "#F39431" : colorsObject[lineData.role]}
-                >{lineData.name}</text>
+            </g>
 
-                {/if}
+            <g class="overlayLinesGroup">
 
-                {#if hoverIndex === i || ["main", "parent", "country", "custom0", "custom1", "custom2", "custom3", "custom4"].includes(lineData.role)}
+                {#each plottedAreas as area, i}
 
-                    {#each lineData.data as datapoint, j}
+                    <Line
+                    overlay=true
+                    {area}
+                    lineData={filteredData.filter((e) => e.areacd === area.areacd)}
+                    {i}
+                    bind:hoverIndex={hoverIndex}
+                    {x}
+                    {y}
+                    {xDomain}
+                    ></Line>
 
-                    <g transform={"translate("+x(datapoint.x)+","+y(datapoint.y)+")"}>
+                {/each}
 
-                    {#if lineData.role === "parent"}
+            </g>
 
-                    <rect
-                    x=-3
-                    y=-3
-                    width=6
-                    height=6
-                    fill={hoverIndex === i ? "#F39431": colorsObject[lineData.role]}
-                    stroke="white"
-                    >
-                    </rect>
-
-                    {:else if lineData.role === "country"}
-
-                    <rect
-                    transform="rotate(45)"
-                    x=-3
-                    y=-3
-                    width=6
-                    height=6
-                    fill={hoverIndex === i ? "#F39431": colorsObject[lineData.role]}
-                    stroke="white"
-                    >
-                    </rect>
-
-                    {:else}
-
-                    <circle
-                    r=3.5
-                    fill={hoverIndex === i ? "#F39431" : colorsObject[lineData.role]}
-                    stroke="white"
-                    >
-                    </circle>
-
-                    {/if} 
-
-                    </g>
-
-
-                    {/each}
-
-                {/if}
-
-                </g>
-
-            {/each}
-
-            {#each restructuredData as lineData, i}
-
-                <path
-                hoverid={i}
-                on:mousemove={mouseoverEvent}
-                on:mouseleave={mouseleaveEvent}
-                class="hoverLine"
-                d={pathFunction(lineData.data)}
-                fill="none"
-                stroke={"white"}
-                stroke-width="15px"
-                opacity={0}
-                ></path>
-
-            {/each}
-
-        </g>
-
+            <Labels
+            x={x(xDomain[1])+5}
+            {labelPlacements}
+            {hoverIndex}
+            ></Labels>
     </svg>
+
 </div>
-
-<style>
-
-p {
-    margin-bottom: 10px;
-    width: 90%;
-    padding: 0px;
-}
-
-h3 {
-    margin-bottom: 0px;
-    width: 90%;
-}
-
-
-</style>

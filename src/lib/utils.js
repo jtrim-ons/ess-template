@@ -16,12 +16,13 @@ export async function getData(url, fetch = window.fetch) {
   } else {
 
     data = csvParse(str, autoType);
-    let cols = data.columns.filter(c => data[0][c] && data[0][c].includes("|"));
+    
+    /*let cols = data.columns.filter(c => {return data[0][c] && data[0][c].includes("|") });
     data.forEach((d, i) => {
       cols.forEach(col => {
         d[col] = d[col].split("|");
       });
-    });
+    });*/
     
   }
 
@@ -188,3 +189,4 @@ function hasJsonStructure(str) {
       return false;
   }
 }
+

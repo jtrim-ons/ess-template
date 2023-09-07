@@ -17,7 +17,7 @@
 <Content>
     <Cards colwidth="wide">
         <Card>
-            <h2>Explore indicators</h2>
+            <h2>Explore topics</h2>
             <p>Discover national and regional trends with maps, charts and headline indicators</p>
             <ButtonLink icon="arrow" href="{base}/indicators">Explore</ButtonLink>
         </Card>

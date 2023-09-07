@@ -1,124 +1,107 @@
 <script>
 import { base } from "$app/paths";
-import { page } from "$app/stores";
-import { getContext } from "svelte";
-import { getName } from "@onsvisual/robo-utils";
 import Titleblock from "$lib/layout/Titleblock.svelte";
 import Headline from "$lib/layout/partial/Headline.svelte";
 import Subhead from "$lib/layout/partial/Subhead.svelte";
 import SectionsWithNav from "$lib/layout/SectionsWithNav.svelte";
-import AreaNav from "../AreaNav.svelte";
 import Placeholder from "$lib/layout/Placeholder.svelte";
-import { getData} from "$lib/utils";
-import { selectedArea, comparisonAreasArray, findSelectedAreas } from "$lib/selectedAreasStore.js";
-import LineChart from "$lib/datavis/LineChart.svelte";
-import DoubleBeeswarmChart from "$lib/datavis/DoubleBeeswarmChart.svelte";
-import SelectComparisonAreas from "$lib/layout/SelectComparisonAreas.svelte";
-import KeyIndicators from "$lib/layout/KeyIndicators.svelte";
+import { getContext } from 'svelte';
+import KeyIndicators from "$lib/datavis/KeyIndicators.svelte";
+import ContentSection from "$lib/datavis/ContentSection.svelte";
 
 export let data;
 
-let data2 = data.data2, additionalData = [];
+console.log(data);
 
-$: visibleAreas = findSelectedAreas($selectedArea, $comparisonAreasArray, data.areas);
+let latestData = getContext('latestData');
+let areas = getContext('areas');
+let areasParentsLookup = getContext("areasParentsLookup");
+let areasGeogLevel = getContext("areasGeogLevel");
+let indicators = getContext('indicators');
+let areasGeogInfo = getContext("areasGeogInfo");
 
-$: additionalAreas = visibleAreas.filter((k) => !data2.map((e) => e.areacd).includes(k.areacd));
+let mainAreaParentsLookup = areasParentsLookup.find((e) => e.areacd === data.areaCode);
 
-$: importAdditionalData(additionalAreas, data.dataImportingInstructions);
+let selectedAreas = [];
 
-function importAdditionalData(additionalAreas, dataImportingInstructions) {
+selectedAreas.push({data: areas.find((e) => e.areacd === data.areaCode), role: "main"})
+selectedAreas.push({data: areas.find((e) => e.areacd === mainAreaParentsLookup.parentcd), role: "parent"})
 
-    let promisesArray = [], codeArray = [], areanmArray = [], roleArray = [];
+if (mainAreaParentsLookup.countrycd !== null & mainAreaParentsLookup.parentcd !== mainAreaParentsLookup.countrycd) {
 
-    additionalAreas.forEach((e) => {
-
-        data.dataImportingInstructions.forEach((i) => {
-
-        if (i.type === "data2") { 
-            
-            promisesArray.push(loadAdditionalData(i.code, e.areacd)) 
-            codeArray.push(i.code)
-            areanmArray.push(e.areanm)
-            roleArray.push(e.role)
-        }
-
-        })
-    })
-
-    Promise.all(promisesArray).then((loadedData) => {
-
-        loadedData.forEach((e,i) => {
-
-            e.areanm = areanmArray[i];
-            e.code = codeArray[i]
-            e.role = roleArray[i]
-
-        })
-
-        additionalData = loadedData;
-    })
+    selectedAreas.push({data: areas.find((e) => e.areacd === mainAreaParentsLookup.countrycd), role: "country"})
 }
 
-async function loadAdditionalData(code, areacd) {
+if (mainAreaParentsLookup.parentcd !== "K02000001") {
 
-    let importedData = getData(`${base}/data/json/area/`+code+`/`+areacd+`.json`)
-                            
-    return importedData
+    selectedAreas.push({data: areas.find((e) => e.areacd === "K02000001"), role: "uk"})
 }
 
-$: sectionsArray = [...new Set(data.componentsArray.map((e) => e.section))];
+let selectedGeogLevel = areasGeogLevel.find((e) => e.areacd === data.areaCode).level
+let areasSameGeog = areasGeogLevel.filter((e) => { 
+    if (["uk", "country"].includes(selectedGeogLevel)) {return e.level === selectedGeogLevel }
+    else if (selectedGeogLevel === "region") {return ["region", "country"].includes(e.level) }
+    else if (selectedGeogLevel === "both") {return ["both", "lower"].includes(e.level)}
+    else {return ["both", selectedGeogLevel].includes(e.level)}
+});
+let clusterLevel = areasGeogInfo.find((e) => e.areacd === data.areaCode).headline;
 
-$: console.log(sectionsArray)
+let siblingAreas = {};
 
+siblingAreas.neighbours = areasParentsLookup.filter((e) => e.areacd != data.areaCode & e.parentcd === mainAreaParentsLookup.parentcd & areasSameGeog.map((el) => el.areacd).includes(e.areacd)).map((el) => el.areacd);
 
+siblingAreas.similar = clusterLevel === null ? [] : areasGeogInfo.filter((e) => e.areacd != data.areaCode & e.headline === clusterLevel & areasSameGeog.map((el) => el.areacd).includes(e.areacd)).map((el) => el.areacd);
+
+siblingAreas.siblings = areasParentsLookup.filter((e) => e.areacd != data.areaCode & areasSameGeog.map((el) => el.areacd).includes(e.areacd)).map((el) => el.areacd)
+
+$: checkboxedRoles = {parent: true, country: true, uk: true, neighbour: false, cluster: false, custom: null};
+
+$: console.log(selectedAreas)
+  
 </script>
 
-{#if $selectedArea}
-<Titleblock breadcrumb={[{label: "Home", url: "/"}, {label: "Explore subnational statistics", url: `${base}/`}, {label: "Find a local area", url: `${base}/areas`}, {label: $selectedArea.areanm}]}>
-    <Headline>{$selectedArea.areanm}</Headline>
-    <Subhead>Get localised data, insights and trends for {getName($selectedArea, "the")}</Subhead>
+<Titleblock breadcrumb={[{label: "Home", url: "/"}, {label: "Explore subnational statistics", url: `${base}/`}, {label: "Find a local area", url: `${base}/areas`}, {label: selectedAreas.find((e) => e.role === "main").data.areanm}]}>
+    <Headline>{selectedAreas.find((e) => e.role === "main").data.areanm}</Headline>
+    <Subhead>Get localised data, insights and trends for {selectedAreas.find((e) => e.role === "main").data.areanm}</Subhead>
 </Titleblock>
-<AreaNav/>
+
 <SectionsWithNav contentsLabel="Explore this area">
-    <section title="Key indicators">
-        <h1>Key indicators</h1>
-        <KeyIndicators
-        data3={data.data3}
-        data4={data.data4}></KeyIndicators>
-    </section>
 
-    {#each sectionsArray as section, i}
-    <section title={section}>
-        <h1>{section}</h1>
+    <KeyIndicators
+    areaKeyIndicators={data.configData.areaKeyIndicators}
+    latestData={latestData.filter((e)=> data.configData.areaKeyIndicators.map((el=>el.id)).includes(e.codeId))}
+    initialData={data.preloadedData.initialData}
+    trimmedIndicators={indicators.filter((e) => data.configData.areaKeyIndicators.map((el=>el.id)).includes(e.id))}
+    {selectedAreas}
+    ></KeyIndicators>
+   
+    {#each [...new Set(data.configData.areaSections.map((e) => e.section))] as sectionName}
 
-        {#each data.componentsArray.filter((e) => e.section === section) as component, i}
+        <ContentSection
+        {sectionName}
+        sectionIndicators={data.configData.areaSections.filter((el) => el.section === sectionName)}
+        {indicators}
+        {selectedAreas}
+        latestData={latestData}
+        initialData={data.preloadedData.initialData}
+        otherData={data.preloadedData.otherData}
+        bind:checkboxedRoles={checkboxedRoles}
+        {siblingAreas}
+        ></ContentSection>
 
-        <SelectComparisonAreas
-        areas={data.areas}
-        ></SelectComparisonAreas>
-
-        {#if component.type === "line"}
-            <LineChart
-            data={[...data2,...additionalData].filter((e) => e.code === component.code)}
-            indicator={component.indicator}
-            zeroBaseline={component.indicator.zeroBaseline}
-            {visibleAreas}
-            ></LineChart>
-        {:else if component.type === "double-beeswarm"}
-            <DoubleBeeswarmChart
-            data={[...data2,...additionalData].filter((e) => e.code === component.code)}
-            indicator={component.indicator}
-            zeroBaseline={component.indicator.zeroBaseline}
-            {visibleAreas}
-            ></DoubleBeeswarmChart>
-
-        
-        {/if}
-
-        {/each}
-
-    </section>
     {/each}
+
+    
+
+
+
+
+
+
+
+
+
+
     <!-- <section title="Demographics">
         <SelectComparisonAreas
         areas={data.areas}
@@ -166,18 +149,11 @@ $: console.log(sectionsArray)
         <p>Here, you can find information and links to the data.</p>
     </section>
 </SectionsWithNav>
-{/if}
 
 <style>
 
 section {
     margin-top: 40px;
-}
-
-.mapContainer {
-    height: 500px;
-    width: 100%;
-    display: block;
 }
 
 </style>

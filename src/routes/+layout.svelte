@@ -1,32 +1,30 @@
 <script>
-    import "../legacy.css";
-    import "../app.css";
-    import { page } from "$app/stores";
-    import { base } from "$app/paths";
-    import { setContext } from "svelte";
-    import { domain } from "$lib/config";
-    import PhaseBanner from "$lib/layout/PhaseBanner.svelte";
-    import ONSFooter from "$lib/layout/ONSFooter.svelte";
-    // import AnalyticsBanner from "$lib/layout/AnalyticsBanner.svelte";
-    import ONSHeaderLite from "$lib/layout/ONSHeaderLite.svelte";
 
-    export let data;
-    setContext("areas", data.areas);
+import "../legacy.css";
+import "../app.css";
+import { page } from "$app/stores";
+import { base } from "$app/paths";
+import { setContext, onMount } from "svelte";
+import { domain } from "$lib/config";
+import PhaseBanner from "$lib/layout/PhaseBanner.svelte";
+import ONSFooter from "$lib/layout/ONSFooter.svelte";
+import ONSHeaderLite from "$lib/layout/ONSHeaderLite.svelte";
 
-    // For localisation of menu etc
-    let path = $page.url.pathname;
-    let lang = $page.url.hostname.split(".")[0] == "cy" ? "cy" : "en";
-    let baseurl = lang == "cy" ? "//cy.ons.gov.uk" : "//www.ons.gov.uk";
+export let data;
 
-    // GOOGLE ANALYTICS
-    // Settings for page analytics. Values must be shared with <AnalyticsBanner> component
-    // const analyticsId = "GTM-MBCBVQS";
-    // const analyticsProps = {
-    //     contentTitle: "Area hub",
-    //     releaseDate: "20230117",
-    //     outputSeries: "areahub",
-    //     contentType: "exploratory",
-    // };
+setContext("latestData", data.latestData);
+setContext("areas", data.areas);
+setContext("areasParentsLookup", data.areasParentsLookup);
+setContext("areasGeogLevel", data.areasGeogLevel);
+setContext("indicators", data.indicators)
+setContext("areasGeogInfo", data.areasGeogInfo)
+setContext("topics", data.topics)
+
+// For localisation of menu etc
+let path = $page.url.pathname;
+let lang = $page.url.hostname.split(".")[0] == "cy" ? "cy" : "en";
+let baseurl = lang == "cy" ? "//cy.ons.gov.uk" : "//www.ons.gov.uk";
+
 </script>
 
 <svelte:head>
