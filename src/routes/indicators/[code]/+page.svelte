@@ -1,55 +1,111 @@
 <script>
 import { base } from "$app/paths";
-import { page } from "$app/stores";
 
 import Titleblock from "$lib/layout/Titleblock.svelte";
 import Headline from "$lib/layout/partial/Headline.svelte";
 import Subhead from "$lib/layout/partial/Subhead.svelte";
 import SectionsWithNav from "$lib/layout/SectionsWithNav.svelte";
-import Map from "$lib/datavis/Map.svelte";
+import KeyIndicators from "$lib/prototypeComponents/topics/keyIndicators/KeyIndicators.svelte";
+import Placeholder from "$lib/layout/Placeholder.svelte";
+import MapSection from "$lib/prototypeComponents/topics/mapSection/MapSection.svelte";
+import GroupedBeeswarms from "$lib/prototypeComponents/topics/groupedBeewarms/GroupedBeeswarms.svelte";
+
+import { toProperCase } from '$lib/utils.js'
 
 export let data;
 
-$: console.log(data);
+let topicName = data.topic;
+let keyIndicatorsArray = data.indicatorsList.slice(0, Math.min(5, data.indicatorsList.length));
 
-$: areasForPlotting = data.areasGeogLevel.filter((e) => ["both", "lower"].includes(e.level)).map((e) => e.areacd)
+let latestData = data.latestData.filter((e) => data.indicatorsList.includes(e.id));
 
-$: filteredData = data.areasGeogInfo.filter((el) => areasForPlotting.includes(el.areacd))
-
-$: console.log(filteredData)
-
-/*export let indicator;
-export let geoType = "ltla";
-export let year = 2023;
-export let data = [];
-export let idKey = "areacd";
-export let valueKey = "value";
-export let colors = ["#ffffcc", "#41b6c4", "#41b6c4", "#2c7fb8", "#253494"];
-export let selected = null;
-export let hovered = null;*/
+$: checkboxedRoles = {parent: false, country: false, uk: false, neighbour: false, cluster: false, custom: null};
 
 </script>
 
 
 <Titleblock breadcrumb={[{label: "Home", url: "/"}, {label: "Explore subnational statistics", url: `${base}/`}, {label: "Expore indicators", url: `${base}/indicators`}, {label: "topic"}]}>
-    <Headline>{data.params.code[0].toUpperCase()+data.params.code.substring(1)}</Headline>
+    <Headline>{toProperCase(topicName)}</Headline>
     <Subhead>{"Topic information"}</Subhead>
 </Titleblock>
-<SectionsWithNav contentsLabel="Explore this indicator">
-    
 
-    <Map
-    data={filteredData.filter((e) => e.health !== null).filter((e) => e.health <= 4)}
-    idKey="areacd"
-    valueKey="health"
-    clustersLookup={data.clustersLookup}
-    ></Map>
+<SectionsWithNav contentsLabel="Explore this indicator">
+
+    <section title="Key indicators">
+
+        <h1>Key indicators</h1>
+
+        <KeyIndicators
+        indicatorsList={keyIndicatorsArray}
+        {latestData}
+        initialData={data.preloadedData.initialData}
+        otherData={data.preloadedData.otherData}
+        bind:checkboxedRoles={checkboxedRoles}
+        ></KeyIndicators>
+
+    </section>
+
+    <section title="Explore geographically">
+
+        <h1>Explore geographically</h1>
+
+        <MapSection
+        indicatorsList={data.indicatorsList}
+        {topicName}
+        {latestData}
+        initialData={data.preloadedData.initialData}
+        otherData={data.preloadedData.otherData}
+        ></MapSection>
+
+    </section>
+
+    <!-- <section title="Top and bottom ranked areas">
+
+        <h1>Top and bottom ranked areas</h1>
+
+    </section> -->
+
+    <section title="Compare areas by group">
+
+        <h1>Compare areas by group</h1>
+
+        <GroupedBeeswarms
+        {topicName}
+        {latestData}
+        indicatorsList={data.indicatorsList}
+        bind:checkboxedRoles={checkboxedRoles}
+        ></GroupedBeeswarms>
+
+    </section>
+
+    <section title="Related publications">
+
+        <Placeholder>Find related publications</Placeholder>
+
+    </section>
 
     <section title="Get the data">
+
         <h2 class="ons-u-mt-xl">Get the data</h2>
         <p>Here, you can find information and links to the data.</p>
-    </section>
-   
 
+    </section>
+    
+
+
+
+
+   
     
 </SectionsWithNav>
+
+
+
+<style>
+
+section {
+    margin-bottom: 80px;
+}
+
+
+</style>

@@ -14,7 +14,7 @@ let areas = getContext('areas');
 
 export let plottedAreas, filteredData, indicator, selectedAreas;
 
-let width=400, height=470, labelColumnWidth = 200, yAxisOffset = 120;
+let width=400, height=470, labelColumnWidth = 220, yAxisOffset = 120;
 
 $: outerPadding = {top: 40, left: 200, right: labelColumnWidth + 5, bottom: 40};
 
@@ -39,7 +39,7 @@ let primaryRolesArray = ["main", "parent", "country", "uk", "custom1", "custom2"
 
 $: plottedAreas = plottedAreas.map((e) => ({
   ...e,
-  radius: primaryRolesArray.includes(e.role) ? 10 : 5
+  radius: primaryRolesArray.includes(e.role) ? 10 : 6
 }));
 
 let lineDataArray = [[],[]];

@@ -20,8 +20,8 @@
 
     $: console.log(clustersLookup);
 
-    let colourObj = {1: "#27A0CC", 2: "#F66068", 3: "#871A5B", 4: "#253494", 99: "#2c7fb8", 999: "#41b6c4", 9999: "#A8BD3A"};
-    
+    let colourObj = {1: "#2166AC", 2: "#ED7320", 3: "#746CB1", 4: "#B2182B", 99: "#2c7fb8", 999: "#41b6c4", 9999: "#A8BD3A"};
+
     let topojson;
     let geojson;
     let mapdata;
@@ -29,7 +29,7 @@
     
     const bounds = {
             uk: [[ -9, 49 ], [ 2, 61 ]],
-            ew: [[-6, 49], [2, 56]]
+            ew: [[-6, 50], [2, 56]]
         };
     
     function getColor(value, breaks, colors) {
@@ -84,14 +84,18 @@
     
     </script>
     
+    <section title="Map">
+        <h1>Compare geographically</h1>
+
+    <div class="container">
     
-    <div class="chart-title">
-    
-        <h3>Clustering local authorities based on health outcomes</h3>
+    <div class="chartLegend">
+
+        <div class="clustersDescriptionContainer">
 
         {#each [1, 2, 3, 4] as cluster, i}
 
-            <div class="clusterContainer">
+            <div class="clusterContainer" style="margin-top: 10px">
 
             <svg
             width=20
@@ -119,11 +123,13 @@
 
 
         {/each}
+
+        </div>
         
         
     </div> 
     
-    <div class="mapContainer">
+    <div class="mapContainer" style="opacity: 0.75">
     
     <Map
     location={{bounds: bounds.ew}}
@@ -162,14 +168,56 @@
     </Map>
     
     </div>
+
+    </div>
+
+    <img style="padding-top: 10px" width="75%" src={`${base}/img/image1.png`} alt="download buttons">
+
+    </section>
     
     <style>
+
+    section {
+        margin-top: 60px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        border-radius: 5px 5px 5px 5px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: grey;
+    }
+
+    .clustersDescriptionContainer {
+        margin-bottom: 20px;
+        margin-right: 20px;
+        margin-left: 20px;
+        margin-top: 20px;
+        border-radius: 15px;
+        border-style: solid;
+        border-width: 0px;
+        border-color: grey;
+        background-color: #F5F5F6;
+
+    }
+
+    p {
+        padding-right: 10px;
+    }
     
     .mapContainer {
-        height: 700px;
-        width: 100%;
-        display: block;
-        padding-bottom: 100px;
+
+        height: 450px;
+        width: 50%;
+    }
+
+    .chartLegend {
+
+        height: 450px;
+        width: 50%;
+
     }
 
     .clusterContainer {

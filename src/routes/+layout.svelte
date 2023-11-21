@@ -4,7 +4,7 @@ import "../legacy.css";
 import "../app.css";
 import { page } from "$app/stores";
 import { base } from "$app/paths";
-import { setContext, onMount } from "svelte";
+import { setContext } from "svelte";
 import { domain } from "$lib/config";
 import PhaseBanner from "$lib/layout/PhaseBanner.svelte";
 import ONSFooter from "$lib/layout/ONSFooter.svelte";
@@ -12,13 +12,42 @@ import ONSHeaderLite from "$lib/layout/ONSHeaderLite.svelte";
 
 export let data;
 
-setContext("latestData", data.latestData);
 setContext("areas", data.areas);
+
 setContext("areasParentsLookup", data.areasParentsLookup);
 setContext("areasGeogLevel", data.areasGeogLevel);
-setContext("indicators", data.indicators)
 setContext("areasGeogInfo", data.areasGeogInfo)
-setContext("topics", data.topics)
+
+let indicators = data.indicators.map((e) => ({ ...e, label: data.indicatorsMetadata.find((el) => e.code == el.code).label }) );
+setContext("indicators", indicators)
+setContext("indicatorsCalculations", data.indicatorsCalculations)
+data.indicatorsMetadata.forEach((e) => {
+
+    e.prefix = e.prefix == null ? "" : e.prefix.replace("GBPSign", "£")
+    e.suffix = e.suffix== null ? "" : e.suffix
+
+});
+setContext("indicatorsMetadata", data.indicatorsMetadata)
+
+setContext("latestData", data.latestData);
+setContext("otherData", data.otherData);
+setContext("initialData", data.initialData);
+
+setContext("periodsLookup", data.periodsLookup);
+
+setContext("clustersInfo", data.clustersInfo);
+setContext("clustersLookup", data.clustersLookup);
+
+setContext("beeswarmKeyData", data.beeswarmKeyData);
+
+let topics = [...new Set(indicators.map((e) => e.topic))].map((e) => ({
+
+    name: e,
+    indicatorsList: indicators.filter((el) => el.topic === e).map((el) => el.id),
+    subTopicsList: [...new Set(indicators.filter((el) => el.topic === e).map((el) => el.subTopic))]
+})).sort((a,b) => a.name - b.name); 
+
+setContext("topics", topics);
 
 // For localisation of menu etc
 let path = $page.url.pathname;

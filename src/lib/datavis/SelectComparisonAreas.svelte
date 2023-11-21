@@ -9,6 +9,8 @@ let comparisonAreaOptionsArray = selectedAreas.map((e) => e.role);
 
 let open = false;
 
+$: console.log(selectedAreas)
+
 
 </script>
 
@@ -24,7 +26,7 @@ let open = false;
             {#each selectedAreas as input, i}
         
                 <label>
-                    <input type="checkbox" bind:checked={checkboxedRoles[input.role]} />{input.data.areanm}
+                    <input type="checkbox" bind:checked={checkboxedRoles[input.role]} />{input.areanm}
                 </label>
         
             {/each}

@@ -13,7 +13,7 @@ let areas = getContext('areas');
 
 export let plottedAreas, filteredData, indicator;
 
-let width=400, height=500, labelColumnWidth = 200
+let width=400, height=500, labelColumnWidth = 170;
 
 $: outerPadding = {top: 10, left: 80, right: labelColumnWidth + 5, bottom: 40};
 

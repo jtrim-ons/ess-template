@@ -10,14 +10,27 @@ import { getData } from "$lib/utils";
 
 export async function load({ fetch }) {
 
-    const latestData = await getData(`${base}/data/csv/latest-year/data.csv`, fetch);
-    const areas = await getData(`${base}/data/config-data/areas.csv`, fetch);
-    const areasParentsLookup = await getData(`${base}/data/config-data/areas-parents-lookup.csv`, fetch);
-    const areasGeogLevel = await getData(`${base}/data/config-data/areas-geog-level.csv`, fetch);
-    const indicators = await getData(`${base}/data/config-data/config-indicators.csv`, fetch);
-    const areasGeogInfo = await getData(`${base}/data/config-data/areas-geog-info.csv`, fetch);
-    const topics = await getData(`${base}/data/config-data/config-topics.csv`, fetch);
+    const areas = await getData(`${base}/data/config-data/geography/areas.csv`, fetch);
+
+    const areasParentsLookup = await getData(`${base}/data/config-data/geography/areas-parents-lookup.csv`, fetch);
+    const areasGeogLevel = await getData(`${base}/data/config-data/geography/areas-geog-level.csv`, fetch);
+    const areasGeogInfo = await getData(`${base}/data/config-data/geography/areas-geog-info.csv`, fetch);
+
+    const indicators = await getData(`${base}/data/config-data/indicators/indicators-lookup.csv`, fetch);
+    const indicatorsCalculations = await getData(`${base}/data/config-data/indicators/indicators-calculations.csv`, fetch);
+    const indicatorsMetadata = await getData(`${base}/data/config-data/indicators/indicators-metadata.csv`, fetch);
+
+    const initialData = await getData(`${base}/data/csv/initial-period/data.csv`, fetch);
+    const otherData = await getData(`${base}/data/csv/other-period/data.csv`, fetch);
+    const latestData = await getData(`${base}/data/csv/latest-period/data.csv`, fetch);
+
+    const periodsLookup = await getData(`${base}/data/config-data/periods/unique-periods-lookup.csv`, fetch);
+
+    const clustersInfo = await getData(`${base}/data/config-data/clusters/clusters-info.csv`, fetch);
+    const clustersLookup = await getData(`${base}/data/config-data/clusters/clusters-lookup.csv`, fetch);
+
+    const beeswarmKeyData = await getData(`${base}/data/csv/beeswarmKeyData.csv`, fetch);
     
-    return { latestData, areas, areasParentsLookup, areasGeogLevel, indicators, areasGeogInfo, topics };
+    return { areas, areasParentsLookup, areasGeogLevel, areasGeogInfo, indicators, indicatorsCalculations, indicatorsMetadata, latestData, initialData, otherData, periodsLookup, beeswarmKeyData, clustersInfo, clustersLookup };
 
 }

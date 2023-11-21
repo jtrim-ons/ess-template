@@ -4,12 +4,12 @@ import { getContext } from 'svelte';
 import Select from "./Select.svelte";
 import items from "./items.json";
 
-export let areasWithData, checkboxedRoles, selectedAreas;
+export let areasWithData, checkboxedRoles, selectedAreas, altText = ""
 
 let areasParentsLookup = getContext("areasParentsLookup");
 let areas = getContext("areas");
 
-let filteredAreasParentsLookup = areasParentsLookup.filter((e) => areasWithData.includes(e.areacd) & !selectedAreas.map((el) => el.data.areacd).includes(e.areacd));
+let filteredAreasParentsLookup = areasParentsLookup.filter((e) => areasWithData.includes(e.areacd) & !selectedAreas.map((el) => el.areacd).includes(e.areacd));
 
 filteredAreasParentsLookup.forEach((el) => {
 
@@ -26,7 +26,7 @@ function doSelectMulti(event) {
 </script>
 
 <form>
-	<Select id="multi" idKey="areacd" labelKey="areanm" groupKey="parentnm" items={filteredAreasParentsLookup} on:select={doSelectMulti} bind:value={checkboxedRoles.custom} isMulti maxSelected={4} placeholder="Add additional comparison areas"/>
+	<Select id="multi" idKey="areacd" labelKey="areanm" groupKey="parentnm" items={filteredAreasParentsLookup} on:select={doSelectMulti} bind:value={checkboxedRoles.custom} isMulti maxSelected={4} placeholder={"Add additional comparison areas"}/>
 </form>
 
 

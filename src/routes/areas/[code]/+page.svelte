@@ -5,142 +5,116 @@ import Headline from "$lib/layout/partial/Headline.svelte";
 import Subhead from "$lib/layout/partial/Subhead.svelte";
 import SectionsWithNav from "$lib/layout/SectionsWithNav.svelte";
 import Placeholder from "$lib/layout/Placeholder.svelte";
-import { getContext } from 'svelte';
-import KeyIndicators from "$lib/datavis/KeyIndicators.svelte";
-import ContentSection from "$lib/datavis/ContentSection.svelte";
+
+import TopicSection from "$lib/prototypeComponents/areas/TopicSection.svelte"
+import SelectComparisonAreas from "$lib/datavis/SelectComparisonAreas.svelte";
+
+import { geogLevelToNameLookup } from "$lib/config.js";
+
+import { setContext, getContext } from 'svelte';
 
 export let data;
 
-console.log(data);
-
-let latestData = getContext('latestData');
-let areas = getContext('areas');
+let areas = getContext("areas");
 let areasParentsLookup = getContext("areasParentsLookup");
 let areasGeogLevel = getContext("areasGeogLevel");
-let indicators = getContext('indicators');
-let areasGeogInfo = getContext("areasGeogInfo");
 
-let mainAreaParentsLookup = areasParentsLookup.find((e) => e.areacd === data.areaCode);
+let topics = getContext("topics");
 
-let selectedAreas = [];
+let latestData = getContext("latestData");
+let otherData = getContext("otherData");
+let initialData = getContext("initialData");
 
-selectedAreas.push({data: areas.find((e) => e.areacd === data.areaCode), role: "main"})
-selectedAreas.push({data: areas.find((e) => e.areacd === mainAreaParentsLookup.parentcd), role: "parent"})
+//// Identify geography level of selected area
 
-if (mainAreaParentsLookup.countrycd !== null & mainAreaParentsLookup.parentcd !== mainAreaParentsLookup.countrycd) {
-
-    selectedAreas.push({data: areas.find((e) => e.areacd === mainAreaParentsLookup.countrycd), role: "country"})
-}
-
-if (mainAreaParentsLookup.parentcd !== "K02000001") {
-
-    selectedAreas.push({data: areas.find((e) => e.areacd === "K02000001"), role: "uk"})
-}
-
-let selectedGeogLevel = areasGeogLevel.find((e) => e.areacd === data.areaCode).level
-let areasSameGeog = areasGeogLevel.filter((e) => { 
+let selectedGeogLevel = areasGeogLevel.find((e) => e.areacd === data.areacd).level;
+let areasWithSameGeog = areasGeogLevel.filter((e) => { 
     if (["uk", "country"].includes(selectedGeogLevel)) {return e.level === selectedGeogLevel }
     else if (selectedGeogLevel === "region") {return ["region", "country"].includes(e.level) }
     else if (selectedGeogLevel === "both") {return ["both", "lower"].includes(e.level)}
     else {return ["both", selectedGeogLevel].includes(e.level)}
-});
-let clusterLevel = areasGeogInfo.find((e) => e.areacd === data.areaCode).headline;
+}).map((e) => e.areacd);
 
-let siblingAreas = {};
+setContext("selectedGeogLevel", selectedGeogLevel);
+setContext("areasWithSameGeog", areasWithSameGeog);
 
-siblingAreas.neighbours = areasParentsLookup.filter((e) => e.areacd != data.areaCode & e.parentcd === mainAreaParentsLookup.parentcd & areasSameGeog.map((el) => el.areacd).includes(e.areacd)).map((el) => el.areacd);
+//// Choose baseline comparators
 
-siblingAreas.similar = clusterLevel === null ? [] : areasGeogInfo.filter((e) => e.areacd != data.areaCode & e.headline === clusterLevel & areasSameGeog.map((el) => el.areacd).includes(e.areacd)).map((el) => el.areacd);
+let baselineComparisonOptions = ["median of all "+geogLevelToNameLookup[selectedGeogLevel]];
+$: chosenId1 = baselineComparisonOptions[0];
+$: baselineComparisonArea = chosenId1.substring(0, 6) === "median" ? "median" : areas.find((e) => e.areanm === chosenId1);
 
-siblingAreas.siblings = areasParentsLookup.filter((e) => e.areacd != data.areaCode & areasSameGeog.map((el) => el.areacd).includes(e.areacd)).map((el) => el.areacd)
+$: console.log(chosenId1);
 
-$: checkboxedRoles = {parent: true, country: true, uk: true, neighbour: false, cluster: false, custom: null};
+let previousTimePeriodOptions = ["earliest available year", "previous year", "5 years earlier", "10 years earlier"];
+$: chosenId2 = previousTimePeriodOptions[0];
 
-$: console.log(selectedAreas)
-  
+//// Identify highlightable areas and track whether they should be visible + add extra areas to set of baseline comparison options
+
+let selectedAndRelatedAreas = [];
+let selectedArea = areas.find((e) => e.areacd === data.areacd);
+
+setContext("selectedArea", selectedArea);
+
+selectedAndRelatedAreas.push({...selectedArea, role: "main"});
+
+let parentLookup = areasParentsLookup.find((e) => e.areacd === data.areacd);
+let parentArea = areas.find((e) => e.areacd === parentLookup.parentcd)
+selectedAndRelatedAreas.push({...parentArea, role: "parent"});
+baselineComparisonOptions.push(parentArea.areanm);
+
+if (parentLookup.parentcd != parentLookup.countrycd & parentLookup.countrycd != '') {
+    
+    selectedAndRelatedAreas.push({...areas.find((e) => e.areacd === parentLookup.countrycd), role: "country"});
+    baselineComparisonOptions.push(parentLookup.countrynm)
+}
+
+if (parentLookup.parentcd != "K02000001") {
+    
+    selectedAndRelatedAreas.push({...areas.find((e) => e.areacd === parentLookup.countrycd), role: "uk"});
+    baselineComparisonOptions.push("United Kingdom")
+}
+
+$: globalVisibleAreasTracker = {main: true, parent: false, country: false, uk: false, neighbour: false, cluster: false, custom: null};
+
+$: visibleAreas = [...selectedAndRelatedAreas.filter((e) => globalVisibleAreasTracker[e.role]), ...(globalVisibleAreasTracker.custom == null ? [] : globalVisibleAreasTracker.custom.map((e, i) => ({...e, role: "custom"+(i+1)})))];
+
 </script>
 
-<Titleblock breadcrumb={[{label: "Home", url: "/"}, {label: "Explore subnational statistics", url: `${base}/`}, {label: "Find a local area", url: `${base}/areas`}, {label: selectedAreas.find((e) => e.role === "main").data.areanm}]}>
-    <Headline>{selectedAreas.find((e) => e.role === "main").data.areanm}</Headline>
-    <Subhead>Get localised data, insights and trends for {selectedAreas.find((e) => e.role === "main").data.areanm}</Subhead>
+<Titleblock breadcrumb={[{label: "Home", url: "/"}, {label: "Explore subnational statistics", url: `${base}/`}, {label: "Find a local area", url: `${base}/areas`}, {label: selectedArea.areanm}]}>
+    <Headline>{selectedArea.areanm}</Headline>
+    <Subhead>Get localised data, insights and trends for {selectedArea.areanm}</Subhead>
 </Titleblock>
 
 <SectionsWithNav contentsLabel="Explore this area">
 
-    <KeyIndicators
-    areaKeyIndicators={data.configData.areaKeyIndicators}
-    latestData={latestData.filter((e)=> data.configData.areaKeyIndicators.map((el=>el.id)).includes(e.codeId))}
-    initialData={data.preloadedData.initialData}
-    trimmedIndicators={indicators.filter((e) => data.configData.areaKeyIndicators.map((el=>el.id)).includes(e.id))}
-    {selectedAreas}
-    ></KeyIndicators>
-   
-    {#each [...new Set(data.configData.areaSections.map((e) => e.section))] as sectionName}
+    <!-- <SelectComparisonAreas
+    selectedAreas={selectedAndRelatedAreas.filter((e) => data.latestData.filter((el) => e.areacd === el.areacd).length > 0 & e.role !== "main")}
+    areasWithData={data.latestData.map((e) => e.areacd)}
+    bind:checkboxedRoles={globalVisibleAreasTracker}
+    selectedArea={selectedAndRelatedAreas.find((e) => e.role === "main").areanm}
+    parentArea={selectedAndRelatedAreas.find((e) => e.role === "parent").areanm}
+    includeSiblings={false}
+    ></SelectComparisonAreas> -->
 
-        <ContentSection
-        {sectionName}
-        sectionIndicators={data.configData.areaSections.filter((el) => el.section === sectionName)}
-        {indicators}
-        {selectedAreas}
-        latestData={latestData}
-        initialData={data.preloadedData.initialData}
-        otherData={data.preloadedData.otherData}
-        bind:checkboxedRoles={checkboxedRoles}
-        {siblingAreas}
-        ></ContentSection>
+    {#each topics as topic, i}
+
+        <TopicSection
+        {baselineComparisonArea}
+        {topic}
+        latestData={latestData.filter((e) => topic.indicatorsList.includes(e.id))}
+        otherData={otherData.filter((e) => topic.indicatorsList.includes(e.id))}
+        initialData={initialData.filter((e) => topic.indicatorsList.includes(e.id))}
+        {visibleAreas}
+        bind:globalVisibleAreasTracker={globalVisibleAreasTracker}
+        bind:chosenId1={chosenId1}
+        {baselineComparisonOptions}
+        bind:chosenId2={chosenId2}
+        {previousTimePeriodOptions}
+        ></TopicSection>
 
     {/each}
 
-    
-
-
-
-
-
-
-
-
-
-
-    <!-- <section title="Demographics">
-        <SelectComparisonAreas
-        areas={data.areas}
-        ></SelectComparisonAreas>
-        <Placeholder>This is a section giving an overview of demographic indicators</Placeholder>
-    </section>
-    <section title="Economy">
-        <SelectComparisonAreas
-        areas={data.areas}
-        ></SelectComparisonAreas>
-        <Placeholder>This is a section giving an overview of economic indicators</Placeholder>
-        <div class="mapContainer">
-        </div>
-    </section>
-    <section title="Labour market">
-        <Placeholder>This is a section giving an overview of labour market indicators</Placeholder>
-    </section>
-    <section title="Health">
-        <Placeholder>This is a section giving an overview of health indicators</Placeholder>
-    </section>
-    <section title="Education">
-        <Placeholder>This is a section giving an overview of education indicators</Placeholder>
-    </section>
-    <section title="Interactive content">
-        {#each data.componentsArray as component, i}
-        {#if component.type === "line"}
-            <LineChart
-            data={[...data2,...additionalData].filter((e) => e.code === component.code & visibleAreas.map((f) => f.areacd).includes(e.areacd) )}
-            indicator={component.indicator}
-            ></LineChart>
-        {:else if component.type === "double-beeswarm"}
-            <DoubleBeeswarmChart
-            data={component.data}
-            indicator={component.indicator}
-            visibleAreas={component.visibleAreas}
-            ></DoubleBeeswarmChart>
-        {/if}
-        {/each}
-    </section> -->
     <section title="Related areas">
         <Placeholder>Find parent, child and neighbouring areas</Placeholder>
     </section>

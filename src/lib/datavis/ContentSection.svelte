@@ -5,6 +5,7 @@ import BeeswarmRowsOption2 from "./BeeswarmRowsOption2.svelte";
 import MainChart from "./MainChart.svelte";
 import Grid from "./Grid.svelte"
 import Grid2 from "./Grid2.svelte"
+import IndicatorsList from "./IndicatorsList.svelte";
 
 export let sectionName, sectionIndicators, indicators, selectedAreas, latestData, otherData, initialData, checkboxedRoles, siblingAreas;
 
@@ -30,10 +31,6 @@ let sectionObject = {
     Wellbeing: "[Dummy text] " + selectedArea + " has an above average level of deprivation and above average employment.",
 }
 
-$: selectedIndicatorsArray = [];
-
-$: console.log(selectedIndicatorsArray);
-
 </script>
 
 <section title={sectionName}>
@@ -41,29 +38,7 @@ $: console.log(selectedIndicatorsArray);
 
     <p>{@html (sectionName in sectionObject ? sectionObject[sectionName] : "")}</p>
 
-    <Grid
-    indicators={[...primaryIndicators,...secondaryIndicators,...otherIndicators]}
-    {latestData}
-    {initialData}
-    {selectedAreas}
-    bind:selectedIndicatorsArray={selectedIndicatorsArray}
-    ></Grid>
-
-    <BeeswarmRowsOption2
-    {trimmedIndicators}
-    {latestData}
-    {primaryIndicators}
-    {secondaryIndicators}
-    {otherIndicators}
-    {selectedAreas}
-    {siblingAreas}
-    bind:checkboxedRoles={checkboxedRoles}
-    {selectedArea}
-    {parentArea}
-    {selectedIndicatorsArray}
-    ></BeeswarmRowsOption2>
-
-    <Grid2
+    <IndicatorsList
     indicators={[...primaryIndicators,...secondaryIndicators,...otherIndicators]}
     {latestData}
     {initialData}
@@ -76,22 +51,7 @@ $: console.log(selectedIndicatorsArray);
     bind:checkboxedRoles={checkboxedRoles}
     {selectedArea}
     {parentArea}
-    ></Grid2>
-
-
-
-    <BeeswarmRows
-    {trimmedIndicators}
-    {latestData}
-    {primaryIndicators}
-    {secondaryIndicators}
-    {otherIndicators}
-    {selectedAreas}
-    {siblingAreas}
-    bind:checkboxedRoles={checkboxedRoles}
-    {selectedArea}
-    {parentArea}
-    ></BeeswarmRows>
+    ></IndicatorsList>
 
     {#each primaryIndicators as indicator}
 

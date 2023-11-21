@@ -1,13 +1,17 @@
 <script>
 
-export let optionsArray, chosenChart;
+export let optionsArray, chosenChart, compareIntroText = true;
 
 
 </script>
 
 <div class="radioContainer">
 
-    <p>Compare...</p>
+    {#if compareIntroText}
+
+        <p>Compare...</p>
+
+    {/if}
 
     {#each optionsArray as option,i}
 

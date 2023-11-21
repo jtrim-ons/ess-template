@@ -9,13 +9,17 @@ export async function getData(url, fetch = window.fetch) {
   let str = await res.text();
   let data;
 
-  if (hasJsonStructure(str)) {
+  data = csvParse(str, (d) => {
 
-    data = JSON.parse(str);
+  for (const key in d) {
+      if (d.hasOwnProperty(key)) {
+        d[key] = String(d[key]);
+      }
+  }
 
-  } else {
+  return d
 
-    data = csvParse(str, autoType);
+  });
     
     /*let cols = data.columns.filter(c => {return data[0][c] && data[0][c].includes("|") });
     data.forEach((d, i) => {
@@ -23,8 +27,6 @@ export async function getData(url, fetch = window.fetch) {
         d[col] = d[col].split("|");
       });
     });*/
-    
-  }
 
   return data;
 }
@@ -190,3 +192,107 @@ function hasJsonStructure(str) {
   }
 }
 
+export function toProperCase(input) {
+  return input.toLowerCase().replace(/(^|\s)\S/g, function (match) {
+    return match.toUpperCase();
+  });
+}
+
+export function findMedianObject(objects, key) {
+  // Sort the array of objects by the "value" property
+  objects.sort((a, b) => a[key] - b[key]);
+
+  // Calculate the index of the median element
+  const medianIndex = Math.floor(objects.length / 2);
+
+  // Return the object at the median index
+  return objects[medianIndex];
+}
+
+export function roundNumber(number, decimalPlaces) {
+
+let roundingFactor = Math.pow(10, decimalPlaces);
+
+return (Math.round(number*roundingFactor)/roundingFactor).toFixed(decimalPlaces);
+}
+
+export function addThousandsSeparator(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+export function calculateMappingBreaks(values) {
+
+  const minValue = values[0];
+  const maxValue = values[values.length - 1];
+
+  // Find specific percentiles
+  const percentile20 = values[Math.floor(values.length * 0.2)];
+  const percentile40 = values[Math.floor(values.length * 0.4)];
+  const percentile60 = values[Math.floor(values.length * 0.6)];
+  const percentile80 = values[Math.floor(values.length * 0.8)];
+
+  return [minValue, percentile20, percentile40, percentile60, percentile80 ,maxValue];
+}
+
+export function calculateMedian(arr, property = null) {
+    
+  const values = arr.map(e => parseFloat(property == null ? e : e[property]));
+  values.sort((a, b) => a - b);
+  const length = values.length;
+
+  if (length % 2 === 0) {
+      const mid1 = values[length / 2 - 1];
+      const mid2 = values[length / 2];
+      return (mid1 + mid2) / 2;
+  } else {
+      return values[Math.floor(length / 2)];
+  }
+}
+
+export function doRectanglesOverlap(x1, x2, y1, y2, x3, x4, y3, y4) {
+  
+    return x1 < x4 && x2 > x3 && y1 < y4 && y2 > y3;
+}
+
+export function splitTextIntoRows(text, numRows) {
+  const words = text.split(' ');
+  const wordsPerRow = Math.ceil(words.length / numRows);
+  const rows = [];
+
+  for (let i = 0; i < numRows; i++) {
+    const start = i * wordsPerRow;
+    const end = start + wordsPerRow;
+    rows.push(words.slice(start, end).join(' '));
+  }
+
+  return rows;
+}
+
+export function makeCurlyBrace(x1,y1,x2,y2,w,q)
+{
+  //Calculate unit vector
+  var dx = x1-x2;
+  var dy = y1-y2;
+  var len = Math.sqrt(dx*dx + dy*dy);
+  dx = dx / len;
+  dy = dy / len;
+
+  //Calculate Control Points of path,
+  var qx1 = x1 + q*w*dy;
+  var qy1 = y1 - q*w*dx;
+  var qx2 = (x1 - .25*len*dx) + (1-q)*w*dy;
+  var qy2 = (y1 - .25*len*dy) - (1-q)*w*dx;
+  var tx1 = (x1 -  .5*len*dx) + w*dy;
+  var ty1 = (y1 -  .5*len*dy) - w*dx;
+  var qx3 = x2 + q*w*dy;
+  var qy3 = y2 - q*w*dx;
+  var qx4 = (x1 - .75*len*dx) + (1-q)*w*dy;
+  var qy4 = (y1 - .75*len*dy) - (1-q)*w*dx;
+
+  return ( "M " +  x1 + " " +  y1 +
+         " Q " + qx1 + " " + qy1 + " " + qx2 + " " + qy2 + 
+          " T " + tx1 + " " + ty1 +
+          " M " +  x2 + " " +  y2 +
+          " Q " + qx3 + " " + qy3 + " " + qx4 + " " + qy4 + 
+          " T " + tx1 + " " + ty1 );
+}

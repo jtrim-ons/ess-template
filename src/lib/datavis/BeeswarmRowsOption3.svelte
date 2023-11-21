@@ -26,6 +26,7 @@ $: console.log(selectedIndicatorsArray, indicatorsArray)
         {#if true}
 
                 <HorizontalBeeswarmOption2
+                key = {indicator.code === "gdhi"}
                 {indicator}
                 filteredData={latestData.filter((e) => e.codeId === indicator.id )}
                 {checkboxedRoles}

@@ -128,7 +128,7 @@ let subTextShort = indicator.subTextShort === null ? "" : indicator.subTextShort
 
 .panelContainer {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     border-bottom: solid black 1px;
 }
 
@@ -144,7 +144,7 @@ h3 {
     display: flex;
     flex-direction: row;
     justify-content: left;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 
 }
 

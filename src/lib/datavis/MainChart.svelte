@@ -11,7 +11,7 @@ export let indicator, latestData, otherData, initialData, selectedAreas, checkbo
 
 let chosenChart = 1;
 
-let optionsArray = [...otherData, ...initialData].filter((e) => e.areacd === selectedAreas.find((el) => el.role === "main").data.areacd).length > 0 ? ["Over time", "To other areas", "Geographically"] : ["To other areas", "Geographically"];
+let optionsArray = [...otherData, ...initialData].filter((e) => e.areacd === selectedAreas.find((el) => el.role === "main").data.areacd).length > 0 ? ["Over time", "To other areas", "To other metrics", "Geographically"] : ["To other areas", "To other metrics", "Geographically"];
 
 $: data = (optionsArray[chosenChart-1] === "Over time" ? [...latestData,...initialData,...otherData] :
 optionsArray[chosenChart-1] === "To other areas" ? [...latestData, ...initialData] : latestData).sort((a,b) => a.year - b.year);

@@ -1,25 +1,53 @@
 export const domain = "https://www.ons.gov.uk";
 export const cdnUrl = "https://cdn.ons.gov.uk/maptiles/ap-geos/v1";
 
-export let thresholdObject = {
-    population_density: [10, 50],
-    female_life_expectancy: [1, 5],
-    gdhi: [5, 20],
-    no_qualifications_rate: [10, 20],
-    life_satisfaction: [2, 10],
+export let geogLevelToNameLookup = {
+    country: "countries",
+    region: "regions",
+    upper: "upper tier local authorities",
+    both: "lower tier local authorities",
+    lower: "lower tier local authorities"
+};
+
+export let medianAbsoluteDeviationLimit = 5;
+
+export let clusterColourPalette = {
+    4: {1: "#206095", 2: "#27A0CC", 3: "#871A5B", 4: "#A8BD3A"},
+    8: {1: "#206095", 2: "#27A0CC", 3: "#871A5B", 4: "#A8BD3A", 5: "#F66068", 6: "#003C57", 7: "#22D0B6", 8: "#A09FA0"}
 }
 
-export let defaultThresholdArray = [1, 10];
+export let clusterToTopicLookup = {
+    economy: "economy",
+    health: "economy",
+    education: "education",
+    skills: "education",
+    health: "health",
+    connectivity: "connectivity",
+    wellbeing: "wellbeing"
+};
 
-export let comparisonTextObject = {high: {T: "Better than average", I: "Above average", F: "Worse than average"}, low: {T: "Worse than average", I: "Below average", F: "Better than average"}, similar: "Similar to average"};
-    
-export let changeTextObject = {high: {T: "Improving", I: "Increasing", F: "Worsening"}, low: {T: "Worsening", I: "Falling", F: "Improving"}, similar: "Little change"};
-
+export let bivariateColourObj = {
+    "improving": {
+        "better than average": "#003a5c",
+        "similar": "#016eae", 
+        "worse than average": "#7bb3d1"
+    },
+    "similar": {
+        "better than average": "#4a4779",
+        "similar": "#8d6c8f",
+        "worse than average": "#dd7c8a"
+    },
+    "worsening": {
+        "better than average": "#4b264d",
+        "similar": "#8a274a",
+        "worse than average": "#cc0024"
+    },
+}
 
 export const colorsObject = {
     "main": "#003C57",
     "parent": "#746CB1",
-    "country": "#F66068",
+    "country": "#118C7B",
     "uk": "#00A3A6",
     "neighbour": "#BCBCBD",
     "cluster": "#707071",

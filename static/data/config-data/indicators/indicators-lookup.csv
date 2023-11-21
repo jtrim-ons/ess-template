@@ -1,0 +1,40 @@
+id,topic,subTopic,code
+1,connectivity,digital connectivity,4g-coverage
+12,connectivity,travel and transport,average-travel-time-long-cycling
+13,connectivity,travel and transport,average-travel-time-long-driving
+14,connectivity,travel and transport,average-travel-time-long-public transport or walking
+28,connectivity,digital connectivity,gigabit-capable-broadband
+2,economy,housing,additions-to-the-housing-stock
+21,economy,labour market,employment-rate-long-Employment Rate
+22,economy,labour market,employment-rate-long-Unemployment Rate
+23,economy,labour market,employment-rate-long-Economic Activity Rate
+24,economy,labour market,employment-rate-long-Economic Inactivity Rate
+29,economy,income and pay,gross-disposable-household-income-per-head
+30,economy,income and pay,gross-median-weekly-pay
+31,economy,business,gross-value-added-per-hour-worked
+3,education and skills,pupil attainment and participation,aged-16-to-64-years-level-3-or-above-qualifications
+4,education and skills,pupil attainment and participation,aged-19-years-and-over-further-education-and-skills-learner-achievements
+5,education and skills,pupil attainment and participation,aged-19-years-and-over-further-education-and-skills-participation
+10,education and skills,apprenticeships,apprenticeships-achievements
+11,education and skills,apprenticeships,apprenticeships-starts
+17,education and skills,early-years learning,children-at-expected-level-for-language-by-end-of-early-years-foundation-stage
+18,education and skills,early-years learning,children-at-expected-level-for-literacy-by-end-of-early-years-foundation-stage
+19,education and skills,early-years learning,children-at-expected-level-for-maths-by-end-of-early-years-foundation-stage
+27,education and skills,pupil attainment and participation,gcses-and-equivalent-in-english-and-maths-by-age-19
+37,education and skills,school performance,persistent-absences-for-all-pupils
+38,education and skills,school performance,persistent-absences-for-pupils-eligible-for-free-school-meals
+39,education and skills,school performance,persistent-absences-for-pupils-looked-after-by-local-authorities
+40,education and skills,attainment and participation,pupils-at-expected-standards-by-end-of-primary-school
+41,education and skills,school performance,schools-and-nursery-schools-rated-good-or-outstanding
+15,health and wellbeing,diagnosis and preventable mortality,cancer-diagnosis-at-stage-1-and-2
+16,health and wellbeing,diagnosis and preventable mortality,cardiovascular-mortality-considered-preventable-in-persons-aged-under-75-2021-census-population-estimates
+20,health and wellbeing,healthy living,cigarette-smokers
+25,health and wellbeing,life expectancy,female-healthy-life-expectancy
+26,health and wellbeing,life expectancy,male-healthy-life-expectancy
+34,health and wellbeing,healthy living,overweight-adults-aged-18-years-and-over
+35,health and wellbeing,healthy living,overweight-children-at-reception-age-aged-four-to-five-years
+36,health and wellbeing,healthy living,overweight-children-at-year-6-age-aged-10-to-11-years
+6,health and wellbeing,self-reported wellbeing,annual-personal-wellbeing-estimates-Anxiety mean score (where 10 is 'completely anxious')
+7,health and wellbeing,self-reported wellbeing,annual-personal-wellbeing-estimates-Worthwhile mean score (where 10 is 'completely worthwhile')
+8,health and wellbeing,self-reported wellbeing,annual-personal-wellbeing-estimates-Happiness mean score (where 10 is 'completely happy')
+9,health and wellbeing,self-reported wellbeing,annual-personal-wellbeing-estimates-Satisfaction mean score (where 10 is 'completely satisfied')
