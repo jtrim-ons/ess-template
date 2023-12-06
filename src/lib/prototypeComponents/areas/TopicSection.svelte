@@ -1,16 +1,24 @@
 <script>
 
 import TopicIntroText from "$lib/prototypeComponents/areas/roboText/TopicIntroText.svelte";
-import DigestBeeswarm from "$lib/prototypeComponents/areas/DigestBeeswarm.svelte";
+import DigestBeeswarmLine from "$lib/prototypeComponents/areas/DigestBeeswarmLine.svelte";
+import MainChart from "$lib/prototypeComponents/areas/MainChart.svelte";
+
 
 import { getContext } from 'svelte';
 
-export let topic, latestData, otherData, initialData, visibleAreas, globalVisibleAreasTracker, chosenId1, baselineComparisonOptions, chosenId2, previousTimePeriodOptions, baselineComparisonArea;
+export let topic;
+export let visibleAreas, globalVisibleAreasTracker;
+export let chosenId1, baselineComparisonArea;
+export let chosenId2;
+export let chosenId4, chosenId5;
+export let chosenId11;
+export let chosenId6;
+export let combinedData
 
 let indicators = getContext("indicators").filter((e) => e.topic === topic.name)
 
 let topicUppercase = topic.name[0].toUpperCase()+topic.name.substring(1);
-
 
 </script>
 
@@ -18,62 +26,32 @@ let topicUppercase = topic.name[0].toUpperCase()+topic.name.substring(1);
 
     <h1><a href="https://www.ons.gov.uk/">{topicUppercase}</a></h1>
 
-    <TopicIntroText
+    <!-- <TopicIntroText
     {topic}
-    ></TopicIntroText>
+    ></TopicIntroText> -->
 
-    <DigestBeeswarm
-    {baselineComparisonArea}
+    <DigestBeeswarmLine
     {topic}
-    {topicUppercase}
-    bind:chosenId1={chosenId1}
-    {baselineComparisonOptions}
-    bind:chosenId2={chosenId2}
-    {previousTimePeriodOptions}
     {indicators}
-    {latestData}
-    {initialData}
-    {otherData}
-    {visibleAreas}
-    ></DigestBeeswarm>
+    {visibleAreas} bind:globalVisibleAreasTracker={globalVisibleAreasTracker}
+    bind:chosenId1={chosenId1} {baselineComparisonArea}
+    bind:chosenId2={chosenId2}
+    bind:chosenId4={chosenId4} bind:chosenId5={chosenId5}
+    {chosenId11}
+    bind:chosenId6={chosenId6}
+    ></DigestBeeswarmLine>
 
-    
-    <!-- <Radio
-    asButtons={true}
-    name="selectMapOption"
-    {optionsArray}
-    bind:chosenId={chosenId}
-    ></Radio>
-
-    <div class="info-rows-container">
-
-    {#if chosenId == 0}
-
-        <KeyFigures
-        indicators={indicatorsList}
-        latestData={latestData.filter((e) => e.areacd === selectedAreas.find((el) => el.role === "main").data.areacd)}
-        initialData={initialData.filter((e) => e.areacd === selectedAreas.find((el) => el.role === "main").data.areacd)}
-        {selectedAreas}
-        ></KeyFigures>
-
-
-    {:else}
-
-        <ListOfBeeswarms
-        {selectedAreas}
-        {latestData}
-        {indicatorsList}
-        {areasSameGeog}
-        bind:checkboxedRoles={checkboxedRoles}
-        ></ListOfBeeswarms>
-
-
-    {/if} -->
-
-
-
-
-
+    <MainChart
+    {indicators}
+    {visibleAreas} bind:globalVisibleAreasTracker={globalVisibleAreasTracker}
+    {baselineComparisonArea}
+    bind:chosenId1={chosenId1}
+    bind:chosenId2={chosenId2}
+    bind:chosenId4={chosenId4}
+    bind:chosenId5={chosenId5}
+    bind:chosenId6={chosenId6}
+    {combinedData}
+    ></MainChart>
 
 </section>
 
@@ -86,6 +64,11 @@ let topicUppercase = topic.name[0].toUpperCase()+topic.name.substring(1);
 
 section {
     margin-bottom: 100px;
+}
+
+h1 {
+    padding: 0px 0px 40px 10px;
+    margin: 0px
 }
 
 

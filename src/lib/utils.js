@@ -31,6 +31,7 @@ export async function getData(url, fetch = window.fetch) {
   return data;
 }
 
+
 const getTypeLabel = (type) =>
         geoNames[type] ? geoNames[type].label : geoCodesLookup[type].label;
 
@@ -295,4 +296,10 @@ export function makeCurlyBrace(x1,y1,x2,y2,w,q)
           " M " +  x2 + " " +  y2 +
           " Q " + qx3 + " " + qy3 + " " + qx4 + " " + qy4 + 
           " T " + tx1 + " " + ty1 );
+}
+
+export const calculatePosition = (rowSvgOuterPadding, chosenId3, scaleWidth, x, value, medianValue, medianAbsoluteDeviation) => {
+
+  return Math.max(-rowSvgOuterPadding.areaSpaceBeyondXScale[chosenId3 === 0 ? "split" : "full"]/2, Math.min(scaleWidth+rowSvgOuterPadding.areaSpaceBeyondXScale[chosenId3 === 0 ? "split" : "full"]/2, x((value - medianValue)/medianAbsoluteDeviation)))
+
 }

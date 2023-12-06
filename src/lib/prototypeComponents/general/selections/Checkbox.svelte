@@ -1,6 +1,6 @@
 <script>
 
-export let optionsArray, chosenId, name, marginBottom = null, fontSize=null;
+export let optionsArray, chosenId, name, spacing = null;
 
 </script>
 
@@ -9,7 +9,7 @@ export let optionsArray, chosenId, name, marginBottom = null, fontSize=null;
 
     {#each optionsArray as option,i}
 
-        <label style="margin-bottom: {marginBottom}">
+        <label style="margin-bottom: {spacing == null ? null : spacing};">
 
             <input 
             type="checkbox" 
@@ -18,7 +18,7 @@ export let optionsArray, chosenId, name, marginBottom = null, fontSize=null;
             bind:group={chosenId} 
             >
 
-            <p style="font-size: {fontSize}">{option}</p>
+            <p>{option}</p>
             
         </label>
 
@@ -40,13 +40,14 @@ label {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 0px 0px 5px 10px;
+    margin: 0px 0px 0px 10px;
 }
 
 p {
     padding: 0px 0px 0px 20px;
     margin: 0px;
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 20px;
 }
 
 

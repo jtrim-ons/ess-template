@@ -7,7 +7,7 @@ import { select } from "d3-selection";
 export let overlay=false, lineData, i, hoverIndex, x, y, xDomain, area;
 
 $: pathFunction = line()
-    .x((d) => { return x(d.year); })
+    .x((d) => { return x(d.xDomainNumb); })
     .y((d) => { return y(d.value); });
 
 function mouseoverEvent(event) { hoverIndex = parseFloat(select(this).attr("hoverid")) };

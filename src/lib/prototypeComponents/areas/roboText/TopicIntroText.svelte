@@ -19,7 +19,10 @@ let selectedArea = getContext("selectedArea");
 <style>
 
 
-
+p {
+    padding: 20px 10px 10px 10px;
+    margin: 0px
+}
 
 
 

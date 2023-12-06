@@ -6,10 +6,10 @@ export let chosenId, name="", optionsArray, width = null, lowHeight = false;
 
 
 
-<div class="ons-field" style={"width: "+width}>
+<div class="ons-field" style="width: {width};">
 
     <select
-    style="text-wrap: wrap;"
+    style="text-wrap: balance;"
     id={name}
     name={name}
     class={"ons-input ons-input--select"+(lowHeight ? " low-height" : "") }
@@ -31,10 +31,15 @@ export let chosenId, name="", optionsArray, width = null, lowHeight = false;
   padding: 2px 2px 2px 5px;
 }
 
-
 .ons-input--select {
     border-color: currentColor;
     background-color: transparent;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+p {
+    font-size: 16px;
 }
 
 </style>

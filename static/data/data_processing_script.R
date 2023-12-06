@@ -131,13 +131,13 @@ previous_indicators <- read_csv("config-data/indicators/indicators-lookup.csv")
 new_indicators <- combined_metadata |>
   filter(!code %in% previous_indicators$code)
 
-if (nrow(new_indicators) > 0) {
-  
-  showDialog("Script not run: update indicators-lookup", "The script has been aborted because the identified set of periods read in from the combined data pulled from the csv files in csv-preprocess includes periods which were not present when this script was last run. These periods can be viewed in the previous-periods data frame. Please add these periods to the unique-periods-lookup.csv file in the config-data/periods folder and re-run.")
-  
-  stop("Script execution aborted - update unique-periods-lookup.")
-  
-}
+# if (nrow(new_indicators) > 0) {
+#   
+#   showDialog("Script not run: update indicators-lookup", "The script has been aborted because the identified set of periods read in from the combined data pulled from the csv files in csv-preprocess includes periods which were not present when this script was last run. These periods can be viewed in the previous-periods data frame. Please add these periods to the unique-periods-lookup.csv file in the config-data/periods folder and re-run.")
+#   
+#   stop("Script execution aborted - update unique-periods-lookup.")
+#   
+# }
 
 indicators_calculations <- previous_indicators[c("id", "code")]
 

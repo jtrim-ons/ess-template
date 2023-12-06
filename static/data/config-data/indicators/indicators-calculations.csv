@@ -1,43 +1,40 @@
 id,code,minXDomain,maxXDomain
-1,4g-coverage,1023,1023
+1,4g-coverage,2023,2023
+12,average-travel-time-long-cycling,2014,2019
+13,average-travel-time-long-driving,2014,2019
+14,average-travel-time-long-public transport or walking,2014,2019
+28,gigabit-capable-broadband,2023,2023
 2,additions-to-the-housing-stock,2021,2021
-3,aged-16-to-64-years-level-3-or-above-qualifications,1004,1021
-4,aged-19-years-and-over-further-education-and-skills-learner-achievements,2016,2021
-5,aged-19-years-and-over-further-education-and-skills-participation,2017,2022
-6,annual-personal-wellbeing-estimates-Anxiety mean score (where 10 is 'completely anxious'),2011,2021
-7,annual-personal-wellbeing-estimates-Worthwhile mean score (where 10 is 'completely worthwhile'),2011,2021
-8,annual-personal-wellbeing-estimates-Happiness mean score (where 10 is 'completely happy'),2011,2021
-9,annual-personal-wellbeing-estimates-Satisfaction mean score (where 10 is 'completely satisfied'),2011,2021
-10,apprenticeships-achievements,2017,2022
-11,apprenticeships-starts,2017,2022
-12,average-travel-time-long-cycling,1014,1019
-13,average-travel-time-long-driving,1014,1019
-14,average-travel-time-long-public transport or walking,1014,1019
-15,cancer-diagnosis-at-stage-1-and-2,1013,1020
-16,cardiovascular-mortality-considered-preventable-in-persons-aged-under-75-2021-census-population-estimates,1021,1021
-17,children-at-expected-level-for-language-by-end-of-early-years-foundation-stage,2021,2021
-18,children-at-expected-level-for-literacy-by-end-of-early-years-foundation-stage,2021,2021
-19,children-at-expected-level-for-maths-by-end-of-early-years-foundation-stage,2021,2021
-20,cigarette-smokers,1012,1022
 21,employment-rate-long-Employment Rate,2004,2022
 22,employment-rate-long-Unemployment Rate,2004,2022
 23,employment-rate-long-Economic Activity Rate,2004,2022
 24,employment-rate-long-Economic Inactivity Rate,2004,2022
-25,female-healthy-life-expectancy,4011,4018
-26,male-healthy-life-expectancy,4011,4018
+29,gross-disposable-household-income-per-head,1997,2020
+30,gross-median-weekly-pay,2002,2022
+31,gross-value-added-per-hour-worked,2004,2021
+3,aged-16-to-64-years-level-3-or-above-qualifications,2004,2021
+4,aged-19-years-and-over-further-education-and-skills-learner-achievements,2016,2021
+5,aged-19-years-and-over-further-education-and-skills-participation,2017,2022
+10,apprenticeships-achievements,2017,2022
+11,apprenticeships-starts,2017,2022
+17,children-at-expected-level-for-language-by-end-of-early-years-foundation-stage,2021,2021
+18,children-at-expected-level-for-literacy-by-end-of-early-years-foundation-stage,2021,2021
+19,children-at-expected-level-for-maths-by-end-of-early-years-foundation-stage,2021,2021
 27,gcses-and-equivalent-in-english-and-maths-by-age-19,2016,2021
-28,gigabit-capable-broadband,1023,1023
-29,gross-disposable-household-income-per-head,997,1020
-30,gross-median-weekly-pay,1002,1022
-31,gross-value-added-per-hour-worked,1004,1021
-32,homicide-offences,4019,4019
-33,inward-foreign-direct-investment-fdi,1015,1021
-34,overweight-adults-aged-18-years-and-over,2015,2021
-35,overweight-children-at-reception-age-aged-four-to-five-years,2006,2021
-36,overweight-children-at-year-6-age-aged-10-to-11-years,2006,2021
 37,persistent-absences-for-all-pupils,2008,2021
 38,persistent-absences-for-pupils-eligible-for-free-school-meals,2017,2021
 39,persistent-absences-for-pupils-looked-after-by-local-authorities,2016,2021
 40,pupils-at-expected-standards-by-end-of-primary-school,2015,2021
 41,schools-and-nursery-schools-rated-good-or-outstanding,2023,2023
-42,total-value-of-uk-exports,1021,1021
+15,cancer-diagnosis-at-stage-1-and-2,2013,2020
+16,cardiovascular-mortality-considered-preventable-in-persons-aged-under-75-2021-census-population-estimates,2021,2021
+20,cigarette-smokers,2012,2022
+25,female-healthy-life-expectancy,2011,2018
+26,male-healthy-life-expectancy,2011,2018
+34,overweight-adults-aged-18-years-and-over,2015,2021
+35,overweight-children-at-reception-age-aged-four-to-five-years,2006,2021
+36,overweight-children-at-year-6-age-aged-10-to-11-years,2006,2021
+6,annual-personal-wellbeing-estimates-Anxiety mean score (where 10 is 'completely anxious'),2011,2021
+7,annual-personal-wellbeing-estimates-Worthwhile mean score (where 10 is 'completely worthwhile'),2011,2021
+8,annual-personal-wellbeing-estimates-Happiness mean score (where 10 is 'completely happy'),2011,2021
+9,annual-personal-wellbeing-estimates-Satisfaction mean score (where 10 is 'completely satisfied'),2011,2021

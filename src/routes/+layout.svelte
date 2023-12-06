@@ -16,9 +16,13 @@ setContext("areas", data.areas);
 
 setContext("areasParentsLookup", data.areasParentsLookup);
 setContext("areasGeogLevel", data.areasGeogLevel);
-setContext("areasGeogInfo", data.areasGeogInfo)
+setContext("areasGeogInfo", data.areasGeogInfo);
 
-let indicators = data.indicators.map((e) => ({ ...e, label: data.indicatorsMetadata.find((el) => e.code == el.code).label }) );
+let indicators = data.indicators.map((e) => ({ 
+    ...e, 
+    label: data.indicatorsMetadata.find((el) => e.code == el.code).label,
+    data: data.combinedData.filter((el) => el.id === e.id)
+}));
 setContext("indicators", indicators)
 setContext("indicatorsCalculations", data.indicatorsCalculations)
 data.indicatorsMetadata.forEach((e) => {
@@ -28,10 +32,6 @@ data.indicatorsMetadata.forEach((e) => {
 
 });
 setContext("indicatorsMetadata", data.indicatorsMetadata)
-
-setContext("latestData", data.latestData);
-setContext("otherData", data.otherData);
-setContext("initialData", data.initialData);
 
 setContext("periodsLookup", data.periodsLookup);
 
@@ -97,12 +97,14 @@ let baseurl = lang == "cy" ? "//cy.ons.gov.uk" : "//www.ons.gov.uk";
         margin: 26px 0;
         padding: 0;
     }
+
     /* .subhead {
     font-size: 18px;
     line-height: 28px;
     margin: 0 0 28px 0;
     padding: 0;
   } */
+  
     p.footer-text {
         font-size: 1.1em;
         margin: 0;

@@ -33,6 +33,7 @@
   "dependencies": {
     "accurate-beeswarm-plot": "^1.0.9",
     "ckmeans": "^2.1.0",
+    "d3": "^7.8.5",
     "d3-fetch": "^3.0.1",
     "d3-force": "^3.0.0",
     "d3-selection": "^3.0.0",

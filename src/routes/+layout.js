@@ -20,9 +20,7 @@ export async function load({ fetch }) {
     const indicatorsCalculations = await getData(`${base}/data/config-data/indicators/indicators-calculations.csv`, fetch);
     const indicatorsMetadata = await getData(`${base}/data/config-data/indicators/indicators-metadata.csv`, fetch);
 
-    const initialData = await getData(`${base}/data/csv/initial-period/data.csv`, fetch);
-    const otherData = await getData(`${base}/data/csv/other-period/data.csv`, fetch);
-    const latestData = await getData(`${base}/data/csv/latest-period/data.csv`, fetch);
+    const combinedData = await getData(`${base}/data/csv/data.csv`, fetch);
 
     const periodsLookup = await getData(`${base}/data/config-data/periods/unique-periods-lookup.csv`, fetch);
 
@@ -31,6 +29,6 @@ export async function load({ fetch }) {
 
     const beeswarmKeyData = await getData(`${base}/data/csv/beeswarmKeyData.csv`, fetch);
     
-    return { areas, areasParentsLookup, areasGeogLevel, areasGeogInfo, indicators, indicatorsCalculations, indicatorsMetadata, latestData, initialData, otherData, periodsLookup, beeswarmKeyData, clustersInfo, clustersLookup };
+    return { areas, areasParentsLookup, areasGeogLevel, areasGeogInfo, indicators, indicatorsCalculations, indicatorsMetadata, combinedData, periodsLookup, beeswarmKeyData, clustersInfo, clustersLookup };
 
 }

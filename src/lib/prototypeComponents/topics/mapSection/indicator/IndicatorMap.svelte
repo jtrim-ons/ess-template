@@ -5,7 +5,7 @@ import Map from "$lib/prototypeComponents/general/mapping/Map.svelte";
 import { getContext } from 'svelte';
 import Legend from "./Legend.svelte";
 
-export let indicatorsList, latestData, initialData, otherData;
+export let indicatorsList, combinedData;
 
 let indicatorsMetadata = getContext("indicatorsMetadata");
 let indicators = getContext("indicators").filter((e) => indicatorsList.includes(e.id));
@@ -20,16 +20,19 @@ let optionsArray1 = indicators.map((e) => e.label)
 $: chosenId1 = optionsArray1[0];
 
 $: selectedIndicatorId = indicators.find((e) => e.label == chosenId1).id;
-$: metadata = indicatorsMetadata.find((e) => e.label == chosenId1);
 
-$: combinedData =  [...latestData.filter((e) => e.id === selectedIndicatorId),...("indicator-"+selectedIndicatorId in initialData ? initialData["indicator-"+selectedIndicatorId] : []),...("indicator-"+selectedIndicatorId in otherData ? otherData["indicator-"+selectedIndicatorId] : [])];
+$: metadata = indicatorsMetadata.find((e) => e.label === chosenId1);
+//$: calculations 
 
-$: optionsArray2 = [...new Set(combinedData.map((e) => e.xDomainNumb))].sort((a,b) => b - a).map((e) => periodsLookup.find((el) => el.xDomainNumb == e).label);
-$: chosenId2 = periodsLookup.find((e) => e.xDomainNumb == indicatorsCalculations.find((el) => el.id == selectedIndicatorId).maxXDomain).label;
+$: calculations = indicatorsCalculations.find((e) => e.code == metadata.code);
 
-$: console.log(chosenId2);
+$: filteredData = combinedData.filter((e) => areasForPlotting.includes(e.areacd) & e.xDomainNumb == calculations.maxXDomain & e.id == calculations.id);
 
-$: filteredData = chosenId2 != null ? combinedData.filter((e) => areasForPlotting.includes(e.areacd) & e.xDomainNumb === periodsLookup.find((el) => el.label == chosenId2).xDomainNumb) : null;
+//$: optionsArray2 = [...new Set(combinedData.map((e) => e.xDomainNumb))].sort((a,b) => b - a).map((e) => periodsLookup.find((el) => el.xDomainNumb == e).label);
+//$: chosenId2 = periodsLookup.find((e) => e.xDomainNumb == indicatorsCalculations.find((el) => el.id == selectedIndicatorId).maxXDomain).label;
+
+$: console.log(filteredData)
+//$: filteredData = chosenId2 != null ? combinedData.filter((e) => areasForPlotting.includes(e.areacd) & e.xDomainNumb === periodsLookup.find((el) => el.label == chosenId2).xDomainNumb) : null;
 
 let breaks = [];
 
@@ -59,29 +62,7 @@ let breaks = [];
 
             <p>{metadata.subtitle+" in"}
 
-                {#if optionsArray2.length > 1} 
-
-                    <span>
-
-                        <div class="dropdown-container">
-
-                            <Dropdown
-                            name={"select-time-period-dropdown"}
-                            bind:chosenId={chosenId2}
-                            optionsArray={optionsArray2}
-                            width="120px"
-                            lowHeight={true}
-                            ></Dropdown>
-
-                        </div>
-
-                    </span>
-
-                {:else}
-
-                 {optionsArray2[0]}
-
-                {/if}
+                 {calculations.maxXDomain}
 
             </p>
 

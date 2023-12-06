@@ -11,20 +11,30 @@ export let geogLevelToNameLookup = {
 
 export let medianAbsoluteDeviationLimit = 5;
 
-export let clusterColourPalette = {
-    4: {1: "#206095", 2: "#27A0CC", 3: "#871A5B", 4: "#A8BD3A"},
-    8: {1: "#206095", 2: "#27A0CC", 3: "#871A5B", 4: "#A8BD3A", 5: "#F66068", 6: "#003C57", 7: "#22D0B6", 8: "#A09FA0"}
+export let rowSvgHeight = {split: 70, full: 70};
+export let rowSvgOuterPadding = {top: {split: 10, full: 10}, left: {split: 10, full: 10}, right: {split: 10, full: 10}, bottom: {split: 30, full: 10}, areaSpaceBeyondXScale: {split: 10, full: 20}};
+export let circleRadius = {background: {split: 3, full: 5}, primary: {split: 7, full: 7}};
+
+export let encodingColourPalette = {better: "#E6F5D0", similar: "#eaeaea", worse: "#FDE0EF", higher: "#eaeaea", lower: "#eaeaea", noData: null};
+
+export const colorsObject = {
+    "main": "#003C57",
+    "parent": "#746CB1",
+    "country": "#118C7B",
+    "uk": "#00A3A6",
+    "neighbour": "#BCBCBD",
+    "cluster": "#707071",
+    "custom1": "#206095",
+    "custom2": "#a8bd3a",
+    "custom3": "#871a5b",
+    "custom4": "#27a0cc",
+    "selected": "#F39431",
+    "median": "#F66068"
 }
 
-export let clusterToTopicLookup = {
-    economy: "economy",
-    health: "economy",
-    education: "education",
-    skills: "education",
-    health: "health",
-    connectivity: "connectivity",
-    wellbeing: "wellbeing"
-};
+
+////////////////////
+
 
 export let bivariateColourObj = {
     "improving": {
@@ -44,19 +54,21 @@ export let bivariateColourObj = {
     },
 }
 
-export const colorsObject = {
-    "main": "#003C57",
-    "parent": "#746CB1",
-    "country": "#118C7B",
-    "uk": "#00A3A6",
-    "neighbour": "#BCBCBD",
-    "cluster": "#707071",
-    "custom1": "#206095",
-    "custom2": "#a8bd3a",
-    "custom3": "#871a5b",
-    "custom4": "#27a0cc",
-    "selected": "#F39431"
+export let clusterColourPalette = {
+    4: {1: "#206095", 2: "#27A0CC", 3: "#871A5B", 4: "#A8BD3A"},
+    8: {1: "#206095", 2: "#27A0CC", 3: "#871A5B", 4: "#A8BD3A", 5: "#F66068", 6: "#003C57", 7: "#22D0B6", 8: "#A09FA0"}
 }
+
+export let clusterToTopicLookup = {
+    economy: "economy",
+    health: "economy",
+    education: "education",
+    skills: "education",
+    health: "health",
+    connectivity: "connectivity",
+    wellbeing: "wellbeing"
+};
+
 
 export const rolesHierarchyObject = {
     "main": 1,

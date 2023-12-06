@@ -5,23 +5,21 @@ import Dropdown from "$lib/prototypeComponents/general/selections/Dropdown.svelt
 
 let selectedArea = getContext("selectedArea");
 
-export let chosenId, optionsArray, name, text, dropdownWidth;
-
-let componentWidth = 500;
+export let chosenId, optionsArray, name, text, width;
 
 </script>
 
-<div class="paragraph-container" bind:clientWidth={componentWidth}>
+<div class="paragraph-container">
 
-    <p style="max-width: {componentWidth-dropdownWidth-20}px">{text}</p>
+    <p>{@html text}</p>
 
     <div class="dropdown-container">
 
         <Dropdown
         {name}
         bind:chosenId={chosenId}
+        width="{Math.min(width-20, chosenId.toString().length*20)}px"
         {optionsArray}
-        width={dropdownWidth+"px"}
         lowHeight={true}
         ></Dropdown>
 
@@ -36,21 +34,22 @@ let componentWidth = 500;
 p {
     margin: 0px;
     padding: 0px;
-    text-wrap: balance;
+    font-size: 16px;
 }
 
 .dropdown-container {
-    margin: 0px 0px 0px 10px;
+    margin: 0px;
     padding: 0px 2px 0px 2px;
 }
 
 .paragraph-container {
+    width: 100%;
     margin: 0px 0px 0px 0px;
     padding: 5px 0px 5px 0px;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;  
-    align-items: center;  
+    flex-direction: column;
+    flex-wrap: nowrap;  
+    gap: 10px;
 }
 
 

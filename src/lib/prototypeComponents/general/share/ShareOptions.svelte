@@ -11,7 +11,7 @@ import { base } from "$app/paths";
 <style>
 
 div {
-    margin: 0px;
+    margin: 20px 0px 0px 0px;
     padding: 0px 0px 10px 0px;
     background-color: rgb(245 245 246);
     border-top-style: solid;

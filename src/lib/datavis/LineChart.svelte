@@ -7,18 +7,25 @@ import Line from './lineChartComponents/Line.svelte';
 import Labels from './Labels.svelte';
 import labelplacer from 'labelplacer';
 import { getContext } from 'svelte';
+    import { filteredData, indicator } from './VerticalBeeswarm.svelte';
 
 
 let areas = getContext('areas');
 
-export let plottedAreas, filteredData, indicator;
+export let visibleAreas, combinedData, indicators;
+
+
 
 let width=400, height=500, labelColumnWidth = 170;
 
 $: outerPadding = {top: 10, left: 80, right: labelColumnWidth + 5, bottom: 40};
 
 $: chartWidth = width - outerPadding.left - outerPadding.right;
-$: chartHeight = height - outerPadding.top - outerPadding.bottom
+$: chartHeight = height - outerPadding.top - outerPadding.bottom;
+
+$: indicator = indicators[0];
+
+$: filteredData = combinedData.filter((e) => e.id == indicator.id & visibleAreas.map((el) => el.areacd).includes(e.areacd))
 
 $: xDomain = [Math.min(...filteredData.map((d) => d.year)), Math.max(...filteredData.map((d) => d.year))];
 
@@ -36,7 +43,7 @@ $: hoverIndex = null;
 
 let primaryRolesArray = ["main", "parent", "country", "uk", "custom1", "custom2", "custom3", "custom4"];
 
-$: labelData = plottedAreas.map((e) => ({
+$: labelData = visibleAreas.map((e) => ({
   ...e,
   yPosition: y(filteredData.find((el) => el.areacd === e.areacd & el.year === Math.max.apply(null,filteredData.filter((elm) => elm.areacd === e.areacd).map((elmt) => elmt.year))).value),
   areanm: areas.find((el) => e.areacd === el.areacd).areanm
@@ -79,7 +86,7 @@ $: labelPlacements = labelplacer(labelData, [-outerPadding.top, chartHeight], d 
 
             <g class="visibleLinesGroup">
 
-                {#each plottedAreas.reverse() as area, i}
+                {#each visibleAreas.reverse() as area, i}
 
                     <Line
                     {area}
@@ -97,7 +104,7 @@ $: labelPlacements = labelplacer(labelData, [-outerPadding.top, chartHeight], d 
 
             <g class="overlayLinesGroup">
 
-                {#each plottedAreas as area, i}
+                {#each visibleAreas as area, i}
 
                     <Line
                     overlay=true
