@@ -37,13 +37,7 @@ $: keyArray = visibleAreas;
 
     </div>
 
-    <Checkbox
-    optionsArray={["Include 90% confidence intervals"]}
-    name="chosenComparison"
-    bind:chosenId={chosenId6}
-    ></Checkbox>
-
-    <div class="key-container">
+    <!-- <div class="key-container">
 
         {#each keyArray as area, i} 
 
@@ -90,7 +84,7 @@ $: keyArray = visibleAreas;
 
         {/each}
 
-    </div>
+    </div> -->
 
 </div>
 

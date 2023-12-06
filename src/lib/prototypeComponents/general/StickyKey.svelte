@@ -41,7 +41,7 @@ $: keyArray = chosenId3 === 0 ? [selectedAndRelatedAreas[0], (baselineComparison
     </div>
 
     <Checkbox
-    optionsArray={["Include 90% confidence intervals"]}
+    optionsArray={["Include 95% confidence intervals"]}
     name="chosenComparison"
     bind:chosenId={chosenId6}
     ></Checkbox>

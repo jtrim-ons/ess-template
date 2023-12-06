@@ -122,11 +122,11 @@ $: xPosition = mainData2.length > 1 ? Math.abs(mainData2[mainData2.length-1].zSc
 </script>
 
 
-<div class="time-comparison-cell-container" style={chosenId3 != 0 | colour == null ? null : "background-color:"+colour+"; box-shadow: 0 0 4px 3px "+colour+";"}>
+<div class="time-comparison-cell-container" style={chosenId6.includes(0) & chosenId3 != 0 | colour == null ? null : "background-color:"+colour+"; box-shadow: 0 0 4px 3px "+colour+";"}>
 
     {#if chosenId11.includes(0) & chosenId3 === 0}
 
-        <p class="from-comparison-description">{text}</p>
+        <p class="from-comparison-description">{chosenId6.includes(0) ? (Math.random() < 0.5 & mainData2.length > 1 ? "Statistically significant change" : "") : text}</p>
 
     {/if}
 

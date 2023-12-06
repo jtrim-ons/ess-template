@@ -1,6 +1,8 @@
 <script>
 
-export let yDomain, y, yAxisOffset = 0, column = 0, indicator;
+import { addThousandsSeparator, roundNumber } from "$lib/utils";
+
+export let yDomain, y, yAxisOffset = 0, column = 0, metadata;
 
 $: yDistance = Math.abs(yDomain[1] - yDomain[0]);
 $: yDistancePowerBelow = 10**Math.floor(Math.log10(yDistance));
@@ -19,9 +21,6 @@ ticks = [];
 for (let i = Math.ceil(yDomain[0]); i <= Math.floor(yDomain[1]); i++) { if (i % tickInterval == 0) {ticks.push(i)} }
 
 }
-
-let prefix = indicator.prefix === null ? "" : indicator.prefix === "pounds" ? "£" : indicator.prefix;
-let suffix = indicator.suffix === null ? "" : indicator.suffix;
     
 </script>
     
@@ -57,7 +56,7 @@ transform={"translate("+(-yAxisOffset)+",0)"}>
                 stroke="none"
                 fill="#333"
                 font-size="14px"
-                >{prefix+d.toLocaleString()+suffix}</text>
+                >{metadata.prefix+addThousandsSeparator(roundNumber(d, 0))+metadata.suffix}</text>
 
             </g>
 

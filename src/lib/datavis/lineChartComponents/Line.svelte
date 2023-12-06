@@ -41,7 +41,7 @@ opacity={hoverIndex === i || hoverIndex === null ? 1 : 0.25}
 
         {#each lineData as datapoint, j}
 
-            <g transform={"translate("+x(datapoint.year)+","+y(datapoint.value)+")"}>
+            <g transform={"translate("+x(datapoint.xDomainNumb)+","+y(datapoint.value)+")"}>
 
                 {#if ["parent", "country", "uk"].includes(area.role)}
 

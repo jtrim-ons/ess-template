@@ -53,11 +53,11 @@ $: text = (mainLatestValue == null ? "No "+selectedArea.areanm+" data" : compari
 
 </script>
 
-<div class="area-comparison-cell-container" style={chosenId3 != 0 | colour == null ? null : "background-color:"+colour+"; box-shadow: 0 0 4px 3px "+colour+";"}>
+<div class="area-comparison-cell-container" style={chosenId6.includes(0) | chosenId3 != 0 | colour == null ? null : "background-color:"+colour+"; box-shadow: 0 0 4px 3px "+colour+";"}>
 
     {#if chosenId11.includes(0) & chosenId3 === 0}
 
-        <p class="from-comparison-description">{text}</p>
+    <p class="from-comparison-description">{chosenId6.includes(0) ? (Math.random() < 0.5 & madFromComparisonValue != null ? "Statistically significant difference" : "") : text}</p>
 
     {/if}
 

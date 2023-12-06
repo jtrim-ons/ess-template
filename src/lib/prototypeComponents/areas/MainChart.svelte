@@ -2,7 +2,6 @@
 
 import Radio from "$lib/prototypeComponents/general/selections/Radio.svelte";
 import ShareOptions from "$lib/prototypeComponents/general/share/ShareOptions.svelte";
-import StickyKey2 from "$lib/prototypeComponents/general/StickyKey2.svelte";
 import IndicatorMap from "$lib/prototypeComponents/topics/mapSection/indicator/IndicatorMap.svelte";
 import LineChart from "$lib/prototypeComponents/areas/MainChart/LineChart.svelte";
 
@@ -31,8 +30,10 @@ let width = 1000;
 
         {#if chosenChart === 0}
 
-        <StickyKey2
+        <LineChart
+        {combinedData}
         {visibleAreas}
+        {indicators}
         bind:globalVisibleAreasTracker={globalVisibleAreasTracker}
         {baselineComparisonArea}
         bind:chosenId1={chosenId1}
@@ -40,12 +41,6 @@ let width = 1000;
         bind:chosenId4={chosenId4}
         bind:chosenId5={chosenId5}
         bind:chosenId6={chosenId6}
-        ></StickyKey2>
-
-        <LineChart
-        {combinedData}
-        {visibleAreas}
-        {indicators}
         ></LineChart>
 
         {:else}
