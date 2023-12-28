@@ -1,5 +1,6 @@
 <script>
 
+import { NavSection } from "@onsvisual/svelte-components";
 import TopicIntroText from "$lib/prototypeComponents/areas/roboText/TopicIntroText.svelte";
 import DigestBeeswarmLine from "$lib/prototypeComponents/areas/DigestBeeswarmLine.svelte";
 import MainChart from "$lib/prototypeComponents/areas/MainChart.svelte";
@@ -22,9 +23,9 @@ let topicUppercase = topic.name[0].toUpperCase()+topic.name.substring(1);
 
 </script>
 
-<section title={topicUppercase}>
+<NavSection title={topicUppercase}>
 
-    <h1><a href="https://www.ons.gov.uk/">{topicUppercase}</a></h1>
+    <!-- <h1><a href="https://www.ons.gov.uk/">{topicUppercase}</a></h1> -->
 
     <!-- <TopicIntroText
     {topic}
@@ -53,7 +54,7 @@ let topicUppercase = topic.name[0].toUpperCase()+topic.name.substring(1);
     {combinedData}
     ></MainChart>
 
-</section>
+    </NavSection>
 
 
 

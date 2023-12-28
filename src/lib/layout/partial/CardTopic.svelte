@@ -8,7 +8,7 @@
   export let description = "Description";
   export let href = "#";
 
-  const { cols } = getContext("tiles");
+  const cols = getContext("cols");
 </script>
 
 <article class="blank" style:grid-column="span {grow && $cols < 3 ? $cols : colspan == 1 ? 1 : colspan > $cols ? $cols : colspan}" style:grid-column-end={grow ? $cols + 1 : null}>

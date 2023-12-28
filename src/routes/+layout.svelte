@@ -1,17 +1,16 @@
 <script>
 
-import "../legacy.css";
+import "@onsvisual/svelte-components/css/main.css";
 import "../app.css";
 import { page } from "$app/stores";
 import { base } from "$app/paths";
 import { setContext } from "svelte";
 import { domain } from "$lib/config";
-import PhaseBanner from "$lib/layout/PhaseBanner.svelte";
-import ONSFooter from "$lib/layout/ONSFooter.svelte";
-import ONSHeaderLite from "$lib/layout/ONSHeaderLite.svelte";
+import { PhaseBanner, Header, Footer } from "@onsvisual/svelte-components";
 
 export let data;
 
+setContext("page", page);
 setContext("areas", data.areas);
 
 setContext("areasParentsLookup", data.areasParentsLookup);
@@ -74,8 +73,8 @@ let baseurl = lang == "cy" ? "//cy.ons.gov.uk" : "//www.ons.gov.uk";
 </svelte:head>
 
 <!-- <AnalyticsBanner {analyticsId} {analyticsProps}/> -->
-<PhaseBanner />
-<ONSHeaderLite baseline />
+<PhaseBanner phase="prototype" />
+<Header />
 
 <!-- <header style:background-color="#206095" style:color="white">
   <div class="wrapper">
@@ -87,7 +86,7 @@ let baseurl = lang == "cy" ? "//cy.ons.gov.uk" : "//www.ons.gov.uk";
     <slot />
 </main>
 
-<ONSFooter />
+<Footer />
 
 <style>
     h1 {

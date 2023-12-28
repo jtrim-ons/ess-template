@@ -2,8 +2,7 @@
 
 import { base } from "$app/paths";
 
-import Titleblock from "$lib/layout/Titleblock.svelte";
-import Headline from "$lib/layout/partial/Headline.svelte";
+import { Breadcrumb, Titleblock } from "@onsvisual/svelte-components";
 import Subhead from "$lib/layout/partial/Subhead.svelte";
 import TopicNav from "./TopicNav.svelte";
 import Content from "$lib/layout/Content.svelte";
@@ -21,23 +20,18 @@ let indicatorsList = indicators.map((e) => indicatorsMetadata.find((el) => el.co
 
 </script>
 
-<Titleblock breadcrumb={[{label: "Home", url: "/"}, {label: "Explore subnational statistics", url: `${base}/`}, {label: "Expore topics"}]}>
-    <Headline>Explore topics</Headline>
+<Breadcrumb links={[{label: "Home", href: "/"}, {label: "Explore subnational statistics", href: `${base}/`}, {label: "Expore topics"}]} background="#eaeaea"/>
+<Titleblock title="Explore topics" background="#eaeaea">
     <Subhead>Discover national and regional trends with maps, charts and headline indicators</Subhead>
 </Titleblock>
 
-<Content>
-    <h2>Select a topic</h2>
-</Content>
 <TopicNav 
+title="Select a topic"
 data={topicsList}
 open/>
 
-
-<Content>
-    <h2>Select an indicator</h2>
-</Content>
 <TopicNav 
+title="Select an indicator"
 data={indicatorsList}
 open
 colwidth="full"/>

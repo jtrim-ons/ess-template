@@ -2,20 +2,15 @@
 
 import { base } from "$app/paths";
 
-import Content from "$lib/layout/Content.svelte";
-import Cards from "$lib/layout/Cards.svelte";
+import { Grid, Cards } from "@onsvisual/svelte-components";
 import CardTopic from "$lib/layout/partial/CardTopic.svelte";
-import Spacer from "$lib/layout/Spacer.svelte";
 
-export let data, colwidth = "medium";
+export let data, colwidth = "medium", title = null;
 
 </script>
 
-<Content>
-    <Cards rowgap="12" colgap="32" {colwidth}>
-        {#each data as topic}
+<Cards {title} {colwidth} marginTop>
+    {#each data as topic}
         <CardTopic title={topic} description={"Description of topic"} href="{base}/indicators/{topic}" blank/>
-        {/each}
-    </Cards>
-    <Spacer/>
-</Content>
+    {/each}
+</Cards>

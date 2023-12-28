@@ -1,9 +1,8 @@
 <script>
 import { base } from "$app/paths";
-import Titleblock from "$lib/layout/Titleblock.svelte";
-import Headline from "$lib/layout/partial/Headline.svelte";
+import { Breadcrumb, Titleblock, NavSections, NavSection } from "@onsvisual/svelte-components";
 import Subhead from "$lib/layout/partial/Subhead.svelte";
-import SectionsWithNav from "$lib/layout/SectionsWithNav.svelte";
+import AreaNav from "../AreaNav.svelte";
 import Placeholder from "$lib/layout/Placeholder.svelte";
 
 import KeyIndicators from "$lib/prototypeComponents/areas/KeyIndicators.svelte";
@@ -159,12 +158,13 @@ $: chosenId11 = [0, 1, 2];
 
 </script>
 
-<Titleblock breadcrumb={[{label: "Home", url: "/"}, {label: "Explore subnational statistics", url: `${base}/`}, {label: "Find a local area", url: `${base}/areas`}, {label: selectedArea.areanm}]}>
-    <Headline>{selectedArea.areanm}</Headline>
+<Breadcrumb links={[{label: "Home", href: "/"}, {label: "Explore subnational statistics", href: `${base}/`}, {label: "Find a local area", href: `${base}/areas`}, {label: selectedArea.areanm}]} background="#eaeaea"/>
+<Titleblock title={selectedArea.areanm} background="#eaeaea">
     <Subhead>Get localised data, insights and trends for {selectedArea.areanm}</Subhead>
 </Titleblock>
+<AreaNav/>
 
-<SectionsWithNav contentsLabel="Explore this area">
+<NavSections contentsLabel="Explore this area">
 
     <div class="temp-container">
 
@@ -179,15 +179,12 @@ $: chosenId11 = [0, 1, 2];
 
     </div>
 
-    <div class="visual-content-container">
-
         <KeyIndicators
         indicators={indicators.filter((e) => ["annual-personal-wellbeing-estimates-Anxiety mean score (where 10 is 'completely anxious')", "female-healthy-life-expectancy", "gross-disposable-household-income-per-head", "employment-rate-long-Unemployment Rate", "aged-16-to-64-years-level-3-or-above-qualifications"].includes(e.code))}
         {chosenId11}
         baselineComparisonArea={selectedAndRelatedAreas.find((e) => e.role === "country")}
         {chosenId2}
         ></KeyIndicators>
-
         {#each topics as topic, i}
 
             <TopicSection
@@ -208,20 +205,16 @@ $: chosenId11 = [0, 1, 2];
 
             combinedData={data.combinedData}
             ></TopicSection>
-
         {/each}
 
-        <section title="Related areas">
+        <NavSection title="Related areas">
             <Placeholder>Find parent, child and neighbouring areas</Placeholder>
-        </section>
-        <section title="Get the data">
+        </NavSection>
+        <NavSection title="Get the data">
             <h2 class="ons-u-mt-xl">Get the data</h2>
             <p>Here, you can find information and links to the data.</p>
-        </section>
-
-    </div>
-
-</SectionsWithNav>
+        </NavSection>
+    </NavSections>
 
 
 <style>

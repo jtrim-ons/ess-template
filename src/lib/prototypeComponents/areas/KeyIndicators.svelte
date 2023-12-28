@@ -1,5 +1,6 @@
 <script>
 
+import { NavSection } from "@onsvisual/svelte-components";
 import Panel from "$lib/prototypeComponents/areas/KeyIndicators/Panel.svelte";
 
 import { getContext } from "svelte";
@@ -17,10 +18,7 @@ let indicatorsCalculations = getContext("indicatorsCalculations");
 
 
 
-<section title="Key indicators">
-
-    <h1>Key indicators</h1>
-
+<NavSection title="Key indicators">
     <div class="rowsContainer">
 
         {#each indicators as indicator}
@@ -35,7 +33,7 @@ let indicatorsCalculations = getContext("indicatorsCalculations");
 
         {/each}
     </div>
-</section>
+</NavSection>
 
 
 
