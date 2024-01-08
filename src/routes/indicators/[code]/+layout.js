@@ -16,5 +16,5 @@ export async function load({ fetch, params }) {
 
 
 
-    return {  }
+    return { selectedIndicatorName: params.code }
 }
