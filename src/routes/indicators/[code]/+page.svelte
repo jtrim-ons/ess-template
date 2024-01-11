@@ -6,7 +6,8 @@
   import Subhead from "$lib/layout/partial/Subhead.svelte";
   import SectionsWithNav from "$lib/layout/SectionsWithNav.svelte";
   import Placeholder from "$lib/layout/Placeholder.svelte";
-  import { Table } from "@onsvisual/svelte-components";
+  import { Dropdown, Table } from "@onsvisual/svelte-components";
+  import { LineChart } from "@onsvisual/svelte-charts";
 
   import { toProperCase } from "$lib/utils.js";
   import { getContext } from "svelte";
@@ -15,14 +16,13 @@
 
   const GLOBAL_DATA = getContext("GLOBAL_DATA");
   const indicators = getContext("indicators");
+  const indicatorsCalculations = getContext("indicatorsCalculations");
   const indicator = indicators.find(
     (d) => d.label === data.selectedIndicatorName
   );
-  const sortedData = [...indicator.data].sort((a, b) => +a.value - +b.value);
-  const tableColumns = [
-    { key: "areanm", label: "Place" },
-    { key: "value", label: "Value", numeric: true, sortable: true },
-  ];
+  const indicatorCalculations = indicatorsCalculations.find(
+    (d) => d.code === indicator.code
+  );
 
   let lookups = {
     areaCodeToName: Object.fromEntries(
@@ -30,14 +30,92 @@
     ),
   };
 
-  //let geogLevels = GLOBAL_DATA
+  const geogLevels = [
+    ...new Set(GLOBAL_DATA.areasGeogLevel.map((d) => d.level)),
+  ];
+  lookups.geogLevels = Object.fromEntries(geogLevels.map((d) => [d, []]));
+  GLOBAL_DATA.areasGeogLevel.forEach((d) =>
+    lookups.geogLevels[d.level].push(d.areacd)
+  );
+  lookups.areaToGeogLevel = Object.fromEntries(
+    GLOBAL_DATA.areasGeogLevel.map((d) => [d.areacd, d.level])
+  );
 
-  const tableData = sortedData.map(({ areacd, value }) => ({
-    areanm: lookups.areaCodeToName[areacd],
-    value,
-  }));
+  const indicatorAreaCodes = [...new Set(indicator.data.map((d) => d.areacd))];
+  const indicatorDates = [];
+  for (
+    let i = +indicatorCalculations.minXDomain;
+    i <= +indicatorCalculations.maxXDomain;
+    i++
+  ) {
+    indicatorDates.push("" + i);
+  }
+  const indicatorDataLookupByPlaceAndDate = {};
+  for (let d of indicator.data) {
+    indicatorDataLookupByPlaceAndDate[`${d.areacd}::${d.xDomainNumb}`] = d;
+  }
 
-  console.log({ GLOBAL_DATA, indicators, data, lookups, indicator });
+  const tableColumns = [{ key: "areanm", label: "Place" }];
+  for (
+    let i = +indicatorCalculations.minXDomain;
+    i <= +indicatorCalculations.maxXDomain;
+    i++
+  ) {
+    tableColumns.push({
+      key: "" + i,
+      label: "" + i,
+      numeric: true,
+      sortable: true,
+    });
+  }
+
+  const tableData = [];
+  for (let areacd of indicatorAreaCodes) {
+    const tableRow = { areacd, areanm: lookups.areaCodeToName[areacd] };
+    for (let date of indicatorDates) {
+      tableRow[date] =
+        indicatorDataLookupByPlaceAndDate[`${areacd}::${date}`]?.value;
+    }
+    tableData.push(tableRow);
+  }
+
+  const lineChartData = [];
+  for (let areacd of indicatorAreaCodes) {
+    for (let date of indicatorDates) {
+      if (indicatorDataLookupByPlaceAndDate[`${areacd}::${date}`] != null) {
+        lineChartData.push({
+          date: +date,
+          areacd,
+          areanm: lookups.areaCodeToName[areacd],
+          value: +indicatorDataLookupByPlaceAndDate[`${areacd}::${date}`].value,
+        });
+      }
+    }
+  }
+
+  const geogLevelOptions = geogLevels.map((d) => ({ id: d, label: d }));
+  let selectedAreaType; // = geogLevelOptions[0];
+  $: console.log(selectedAreaType);
+  $: filteredTableData = selectedAreaType
+    ? tableData.filter(
+        (d) => lookups.areaToGeogLevel[d.areacd] === selectedAreaType.id
+      )
+    : tableData;
+  $: filteredLineChartData = selectedAreaType
+    ? lineChartData.filter(
+        (d) => lookups.areaToGeogLevel[d.areacd] === selectedAreaType.id
+      )
+    : lineChartData;
+  $: console.log(filteredTableData);
+
+  console.log({
+    GLOBAL_DATA,
+    indicators,
+    data,
+    lookups,
+    indicator,
+    indicatorCalculations,
+  });
 </script>
 
 <Titleblock
@@ -58,13 +136,80 @@
     <p>Here, you can find information and links to the data.</p>
   </section>
 
-  <div>
-    <Table data={tableData} columns={tableColumns} />
+  <section title="Time series">
+    <h2 class="ons-u-mt-xl">Time series</h2>
+    <div>
+      <Dropdown options={geogLevelOptions} bind:value={selectedAreaType} />
+      {filteredLineChartData.length}
+      <!-- TODO: remove the unnecessary key block around this -->
+      {console.log({ filteredLineChartData })}
+      {#if filteredLineChartData.length < 100}
+        {#key filteredLineChartData}
+          <div class="chart-container">
+            <!-- <LineChart
+              data={[filteredLineChartData[10], filteredLineChartData[11]]}
+              xKey="date"
+              yKey="value"
+              zKey="areanm"
+              title="Line chart example"
+              footer="Source: ONS."
+              legend={true}
+            /> -->
+          </div>
+        {/key}
+      {/if}
+    </div>
+  </section>
+
+  <div class="chart-container">
+    <LineChart
+      data={[
+        { year: 2017, value: 320, group: "apples" },
+        { year: 2017, value: 480, group: "bananas" },
+        { year: 2017, value: 640, group: "cherries" },
+        { year: 2017, value: 400, group: "dates" },
+        { year: 2018, value: 640, group: "apples" },
+        { year: 2018, value: 960, group: "bananas" },
+        { year: 2018, value: 640, group: "cherries" },
+        { year: 2018, value: 400, group: "dates" },
+        { year: 2019, value: 1600, group: "apples" },
+        { year: 2019, value: 1440, group: "bananas" },
+        { year: 2019, value: 960, group: "cherries" },
+        { year: 2019, value: 400, group: "dates" },
+        { year: 2020, value: 3840, group: "apples" },
+        { year: 2020, value: 1920, group: "bananas" },
+        { year: 2020, value: 960, group: "cherries" },
+        { year: 2020, value: 400, group: "dates" },
+      ]}
+      xKey="year"
+      yKey="value"
+      zKey="group"
+      title="Simple line chart"
+      footer="Source: ONS."
+      mode="default"
+      legend
+    />
   </div>
+
+  <section title="Table">
+    <h2 class="ons-u-mt-xl">Table</h2>
+    <div>
+      <Dropdown options={geogLevelOptions} bind:value={selectedAreaType} />
+      {filteredTableData.length}
+      {#key filteredTableData}
+        <!-- A hack to re-create the table -->
+        <Table data={filteredTableData} columns={tableColumns} />
+      {/key}
+    </div>
+  </section>
 </SectionsWithNav>
 
 <style>
   section {
     margin-bottom: 80px;
+  }
+
+  .chart-container {
+    height: 500px;
   }
 </style>
